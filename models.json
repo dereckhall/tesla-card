@@ -6,7 +6,7 @@
       "variants": [
         {
           "id": "3.1",
-          "label": "2017–2023",
+          "label": "2017\u00e2\u20ac\u201c2023",
           "colours": [
             {
               "id": "red_multi_coat",
@@ -86,12 +86,13 @@
       "variants": [
         {
           "id": "Y.1",
-          "label": "2020–2024",
+          "label": "2020\u00e2\u20ac\u201c2024",
           "colours": [
             {
               "id": "pearl_white_multi_coat",
               "name": "Pearl White Multi-Coat",
               "swatch": "#f2f2f2"
+			  "hasImages": true
             },
             {
               "id": "solid_black",
@@ -128,6 +129,7 @@
               "id": "stealth_grey",
               "name": "Stealth Grey",
               "swatch": "#515356"
+			  "hasImages": true
             }
           ]
         },
@@ -148,7 +150,8 @@
             {
               "id": "quicksilver",
               "name": "Quicksilver",
-              "swatch": "#9e9a91"
+              "swatch": "#9e9a91",
+              "hasImages": true
             },
             {
               "id": "ultra_red",
@@ -175,12 +178,13 @@
       "variants": [
         {
           "id": "S.1",
-          "label": "2012–2021",
+          "label": "2012\u00e2\u20ac\u201c2021",
           "colours": [
             {
               "id": "pearl_white_multi_coat",
               "name": "Pearl White Multi-Coat",
               "swatch": "#f2f2f2"
+			  "hasImages": true
             },
             {
               "id": "solid_black",
@@ -206,6 +210,7 @@
               "id": "silver_metallic",
               "name": "Silver Metallic",
               "swatch": "#c0c0c0"
+			  "hasImages": true
             }
           ]
         },
@@ -258,7 +263,7 @@
       "variants": [
         {
           "id": "X.1",
-          "label": "2015–2021",
+          "label": "2015\u00e2\u20ac\u201c2021",
           "colours": [
             {
               "id": "solid_black",
