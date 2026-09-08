@@ -92,7 +92,6 @@
               "id": "pearl_white_multi_coat",
               "name": "Pearl White Multi-Coat",
               "swatch": "#f2f2f2"
-			  "hasImages": true
             },
             {
               "id": "solid_black",
@@ -129,7 +128,6 @@
               "id": "stealth_grey",
               "name": "Stealth Grey",
               "swatch": "#515356"
-			  "hasImages": true
             }
           ]
         },
@@ -184,7 +182,6 @@
               "id": "pearl_white_multi_coat",
               "name": "Pearl White Multi-Coat",
               "swatch": "#f2f2f2"
-			  "hasImages": true
             },
             {
               "id": "solid_black",
@@ -210,7 +207,6 @@
               "id": "silver_metallic",
               "name": "Silver Metallic",
               "swatch": "#c0c0c0"
-			  "hasImages": true
             }
           ]
         },
