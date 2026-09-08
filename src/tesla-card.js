@@ -569,10 +569,10 @@ class TeslaCard extends LitElement {
           fr: this._val(this.E.DOOR_PASSENGER_REAR)  === 'on',
         }
       : {
-          nf: this._attr(this.E.DOORS, 'driver_front')    === true,
-          nr: this._attr(this.E.DOORS, 'driver_rear')     === true,
-          ff: this._attr(this.E.DOORS, 'passenger_front') === true,
-          fr: this._attr(this.E.DOORS, 'passenger_rear')  === true,
+          nf: this._attr(this.E.DOORS, 'driver_front')    === 'Open',
+          nr: this._attr(this.E.DOORS, 'driver_rear')     === 'Open',
+          ff: this._attr(this.E.DOORS, 'passenger_front') === 'Open',
+          fr: this._attr(this.E.DOORS, 'passenger_rear')  === 'Open',
         };
 
     // When plugged in and on-charge images exist, switch to rear 3/4 view

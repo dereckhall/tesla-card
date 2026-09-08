@@ -120,7 +120,7 @@ const CUSTOM = {
 
   // Binary sensors
   CHARGING:             'binary_sensor.{car_name}_charging',
-  PLUGGED_IN:           'binary_sensor.{car_name}_plugged_in',
+  PLUGGED_IN:           'binary_sensor.{car_name}_charger',
   PARKING_BRAKE:        'binary_sensor.{car_name}_parking_brake',
   FRUNK:                'binary_sensor.{car_name}_frunk',
   TRUNK:                'binary_sensor.{car_name}_trunk',
