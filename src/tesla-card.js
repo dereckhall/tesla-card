@@ -569,10 +569,10 @@ class TeslaCard extends LitElement {
           fr: this._val(this.E.DOOR_PASSENGER_REAR)  === 'on',
         }
       : {
-          nf: this._attr(this.E.DOORS, 'driver_front')    === 'Open',
-          nr: this._attr(this.E.DOORS, 'driver_rear')     === 'Open',
-          ff: this._attr(this.E.DOORS, 'passenger_front') === 'Open',
-          fr: this._attr(this.E.DOORS, 'passenger_rear')  === 'Open',
+          nf: this._attr(this.E.DOORS, 'Driver Front')    === 'Open',
+          nr: this._attr(this.E.DOORS, 'Driver Rear')     === 'Open',
+          ff: this._attr(this.E.DOORS, 'Passenger Front') === 'Open',
+          fr: this._attr(this.E.DOORS, 'Passenger Rear')  === 'Open',
         };
 
     // When plugged in and on-charge images exist, switch to rear 3/4 view
@@ -668,7 +668,7 @@ class TeslaCard extends LitElement {
     // ── Derived display values for nav rows ──
     const lockState   = this._val(this.E.DOOR_LOCK);
     const isLocked    = lockState === 'locked';
-    const chgState    = this._val(this.E.CHARGING_STATE) ?? '—';
+    const chgState = this._attr(this.E.PLUGGED_IN, 'charging_state') ?? '—';
     const chgRate     = this._val(this.E.CHARGE_RATE);
     const chgRateUnit = this._attr(this.E.CHARGE_RATE, 'unit_of_measurement') ?? 'kW';
     const climState   = this._val(this.E.CLIMATE);

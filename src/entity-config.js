@@ -109,8 +109,8 @@ const FLEET = {
 const CUSTOM = {
   // Sensors
   BATTERY_LEVEL:        'sensor.{car_name}_battery',
-  BATTERY_RANGE:        'sensor.{car_name}_battery_range',
-  CHARGE_RATE:          'sensor.{car_name}_charge_rate',
+  BATTERY_RANGE:        'sensor.{car_name}_range',
+  CHARGE_RATE:          'sensor.{car_name}_charging_rate',
   CHARGE_LIMIT:         'sensor.{car_name}_charge_limit',
   CHARGING_STATE:       'sensor.{car_name}_charging_state',
   TEMPERATURE_INSIDE:   'sensor.{car_name}_temperature_inside',
@@ -151,7 +151,7 @@ const CUSTOM = {
   DOG_MODE:             'switch.{car_name}_dog_mode',
 
   // Steering wheel heater
-  STEERING_WHEEL_HEATER:      null,
+  STEERING_WHEEL_HEATER: 'select.{car_name}_heated_steering_wheel',
   AUTO_STEERING_WHEEL_HEATER: null,
 
   // Select — cabin overheat protection
@@ -172,13 +172,13 @@ const CUSTOM = {
   CHARGING_AMPS_NUMBER: 'number.{car_name}_charging_amps',
 
   // Buttons
-  CHARGE_PORT_OPEN:     'button.{car_name}_charge_port_open',
-  CHARGE_PORT_CLOSE:    'button.{car_name}_charge_port_close',
+  CHARGE_PORT_OPEN:     'cover.{car_name}_charger_door',
+  CHARGE_PORT_CLOSE:    'cover.{car_name}_charger_door',
   HORN:                 'button.{car_name}_horn',
   FLASH_LIGHTS:         'button.{car_name}_flash_lights',
   REMOTE_START:         'button.{car_name}_remote_start',
   OPEN_FRUNK:           'button.{car_name}_frunk',
-  OPEN_TRUNK:           'button.{car_name}_trunk',
+  OPEN_TRUNK:           'cover.{car_name}_trunk',
   FORCE_UPDATE:         'button.{car_name}_force_data_update',
 
   // Covers
@@ -190,16 +190,16 @@ const CUSTOM = {
   ENERGY_ADDED:         'sensor.{car_name}_energy_added',
 
   // Tyre pressure
-  TYRE_FL:              null,
-  TYRE_FR:              null,
-  TYRE_RL:              null,
-  TYRE_RR:              null,
+  TYRE_FL: 'sensor.{car_name}_tpms_front_left',
+  TYRE_FR: 'sensor.{car_name}_tpms_front_right',
+  TYRE_RL: 'sensor.{car_name}_tpms_rear_left',
+  TYRE_RR: 'sensor.{car_name}_tpms_rear_right',
 
   // Time to full charge
-  TIME_TO_FULL_CHARGE:  'sensor.{car_name}_time_to_full_charge',
+  TIME_TO_FULL_CHARGE:  'sensor.{car_name}_time_charge_complete',
 
   // Navigation
-  DISTANCE_TO_ARRIVAL:  null,
+  DISTANCE_TO_ARRIVAL: 'sensor.{car_name}_distance_to_arrival',
   TIME_TO_ARRIVAL:      null,
 
   // Device tracker
