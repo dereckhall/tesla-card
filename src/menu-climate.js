@@ -69,7 +69,7 @@ class TeslaMenuClimate extends TeslaBase {
       const modeMap = { 'Off': 'off', 'No A/C': 'fan_only', 'On': 'cool' };
       const mode = modeMap[opt] ?? 'off';
       if (mode === 'off') {
-        this._svc('climate', 'turn_off', this.E.CABIN_OVERHEAT);
+        this._svc('climate', 'set_hvac_mode', this.E.CABIN_OVERHEAT, { hvac_mode: 'off' });
       } else {
         this._svc('climate', 'set_hvac_mode', this.E.CABIN_OVERHEAT, { hvac_mode: mode });
       }
@@ -233,7 +233,11 @@ class TeslaMenuClimate extends TeslaBase {
           <!-- Main control row: [Power/Off] [← 20.0° →] [Vent] -->
           <div class="clim-main-row">
             <button class="clim-icon-btn${climOn ? ' clim-active' : ''}"
-              @click=${() => this._svc('climate', climOn ? 'turn_off' : 'turn_on', this.E.CLIMATE)}>
+              @click=${() => {
+				const hvacModes = this._attr(this.E.CLIMATE, 'hvac_modes') || [];
+				const onMode = hvacModes.find(m => m !== 'off') || 'heat_cool';
+				this._svc('climate', 'set_hvac_mode', this.E.CLIMATE, { hvac_mode: climOn ? 'off' : onMode });
+			  }}>			
               <span class="icon">${unsafeHTML(ICONS.power)}</span>
               <span>${climOn ? 'On' : 'Off'}</span>
             </button>
