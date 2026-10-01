@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.3] - 2026-09-30
+
+### Fixed
+- **Climate back arrow matches the other screens** — the Model Y 2025+ Quicksilver climate images had the Tesla app's own back button (a dark rounded square) baked into the top-left corner, so the card's arrow sat on a box there and nowhere else. The square is removed from all four climate images and the side mirror it covered is restored.
+
 ## [1.3.2] - 2026-09-30
 
 ### Changed
