@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.7] - 2026-09-30
+
+### Changed
+- **HACS from this fork** — default `image_path` is now `/hacsfiles/tesla-card` (where HACS installs this repo), and the README's HACS button points at `dereckhall/tesla-card`. Release tags have no `v` prefix from here on.
+
 ## [1.0.3] - 2026-03-20
 
 ### Added

@@ -2,7 +2,7 @@
 
 A custom Lovelace card for Tesla vehicles in Home Assistant. Supports the **official [Tesla Fleet](https://www.home-assistant.io/integrations/tesla_fleet/)** integration, the **[alandtse/tesla](https://github.com/alandtse/tesla)** custom integration, and **fully custom entity mapping** for MQTT or any other integration. Control your Tesla directly from your dashboard with a clean, app-style interface.
 
-[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ds2000&repository=homeassistant-fe-tesla&category=plugin)
+[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=dereckhall&repository=tesla-card&category=plugin)
 
 If you find this card useful: [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-donate-yellow?logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/daveshaw301)
 
@@ -50,9 +50,9 @@ Help us grow the image library — submit your car's screenshots via the [Image 
 
 ### Via HACS (recommended)
 
-[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ds2000&repository=homeassistant-fe-tesla&category=plugin)
+[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=dereckhall&repository=tesla-card&category=plugin)
 
-Or manually: open HACS, click **Frontend** > **+**, search for **Tesla Card**, and install.
+Or manually: open HACS, click ⋮ > **Custom repositories**, add `https://github.com/dereckhall/tesla-card` (type **Dashboard**), then install **Tesla Card**.
 
 ### Manual
 
@@ -95,7 +95,7 @@ car_name: my_tesla
 | `entity_overrides` | No | -- | Map of entity keys to custom entity IDs (used with `integration: entities`) |
 | `car_model` | No | `3` | Model number: `3`, `Y`, `S`, or `X` |
 | `car_color` | No | `red_multi_coat` | Colour ID matching the image folder name |
-| `image_path` | No | `/hacsfiles/homeassistant-fe-tesla` | Base path where car images are stored |
+| `image_path` | No | `/hacsfiles/tesla-card` | Base path where car images are stored |
 | `name` | No | _(car_name)_ | Display name shown at the top of the card |
 | `show_speed` | No | `true` | Show the Parked / speed status column |
 

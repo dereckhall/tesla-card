@@ -113,9 +113,9 @@ export class TeslaCardEditor extends LitElement {
           Image Path
           <input
             name="image_path"
-            .value=${this.config.image_path ?? '/hacsfiles/homeassistant-fe-tesla'}
+            .value=${this.config.image_path ?? '/hacsfiles/tesla-card'}
             @change=${this._valueChanged}
-            placeholder="/hacsfiles/homeassistant-fe-tesla"
+            placeholder="/hacsfiles/tesla-card"
           />
         </label>
         <label>
