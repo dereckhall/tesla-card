@@ -695,7 +695,6 @@ export const climateStyles = css`
     justify-content: center;
   }
 
-  /* Ignore collapse in landscape — always show full car */
 
   .landscape .clim-car-inner {
     width: 100%;

@@ -685,7 +685,6 @@ var hi=Object.defineProperty;var di=(r,t,e)=>t in r?hi(r,t,{enumerable:!0,config
     justify-content: center;
   }
 
-  /* Ignore collapse in landscape — always show full car */
 
   .landscape .clim-car-inner {
     width: 100%;
