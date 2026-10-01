@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1] - 2026-09-30
+
+### Fixed
+- **Garbled year ranges in the model picker** — `2017â€“2023` and friends now show a real en dash (`2017–2023`). The dash in `models.json` had been double-encoded upstream.
+
 ## [1.1.0] - 2026-09-30
 
 ### Changed (breaking)
