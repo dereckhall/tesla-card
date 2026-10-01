@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   TESLA_MODELS,
-  getVariantColours,
+  getVariantColors,
   variantHasImages,
   getVariants,
 } from '../src/models.js';
@@ -28,8 +28,8 @@ describe('TESLA_MODELS', () => {
       for (const variant of model.variants) {
         expect(variant).toHaveProperty('id');
         expect(variant).toHaveProperty('label');
-        expect(variant).toHaveProperty('colours');
-        expect(Array.isArray(variant.colours)).toBe(true);
+        expect(variant).toHaveProperty('colors');
+        expect(Array.isArray(variant.colors)).toBe(true);
       }
     }
   });
@@ -37,7 +37,7 @@ describe('TESLA_MODELS', () => {
   it('every variant colors array includes "neutral"', () => {
     for (const model of TESLA_MODELS) {
       for (const variant of model.variants) {
-        expect(variant.colours).toContain('neutral');
+        expect(variant.colors).toContain('neutral');
       }
     }
   });
@@ -54,27 +54,27 @@ describe('TESLA_MODELS', () => {
   });
 });
 
-// ── getVariantColours() ─────────────────────────────────────────────────────
+// ── getVariantColors() ─────────────────────────────────────────────────────
 
-describe('getVariantColours', () => {
+describe('getVariantColors', () => {
   it('returns colors for a known model+variant', () => {
-    const colours = getVariantColours('3', '3.1');
-    expect(Array.isArray(colours)).toBe(true);
-    expect(colours).toContain('neutral');
+    const colors = getVariantColors('3', '3.1');
+    expect(Array.isArray(colors)).toBe(true);
+    expect(colors).toContain('neutral');
   });
 
   it('includes non-neutral colors with images for Model 3 3.1', () => {
-    const colours = getVariantColours('3', '3.1');
-    expect(colours.length).toBeGreaterThan(1);
-    expect(colours).toContain('red_multi_coat');
+    const colors = getVariantColors('3', '3.1');
+    expect(colors.length).toBeGreaterThan(1);
+    expect(colors).toContain('red_multi_coat');
   });
 
   it('returns ["neutral"] for unknown model', () => {
-    expect(getVariantColours('UNKNOWN', '1.0')).toEqual(['neutral']);
+    expect(getVariantColors('UNKNOWN', '1.0')).toEqual(['neutral']);
   });
 
   it('returns ["neutral"] for unknown variant of known model', () => {
-    expect(getVariantColours('3', 'UNKNOWN')).toEqual(['neutral']);
+    expect(getVariantColors('3', 'UNKNOWN')).toEqual(['neutral']);
   });
 });
 

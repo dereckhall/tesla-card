@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { FACTORY_COLOURS } from './recolour.js';
+import { FACTORY_COLORS } from './recolor.js';
 import { ICONS } from './icons.js';
 
-class TeslaColourPicker extends LitElement {
+class TeslaColorPicker extends LitElement {
 
   static get properties() {
     return {
@@ -332,9 +332,9 @@ class TeslaColourPicker extends LitElement {
     }
   }
 
-  _selectColour(fc) {
+  _selectColor(fc) {
     this._showCustom = false;
-    this.dispatchEvent(new CustomEvent('colour-changed', {
+    this.dispatchEvent(new CustomEvent('color-changed', {
       detail: { dir: fc.dir, name: fc.name },
       bubbles: true, composed: true,
     }));
@@ -356,7 +356,7 @@ class TeslaColourPicker extends LitElement {
   }
 
   _fireCustomChange() {
-    this.dispatchEvent(new CustomEvent('colour-changed', {
+    this.dispatchEvent(new CustomEvent('color-changed', {
       detail: { dir: 'custom', name: 'Custom', h: this._hue, s: this._sat },
       bubbles: true, composed: true,
     }));
@@ -364,7 +364,7 @@ class TeslaColourPicker extends LitElement {
 
   _reset() {
     this._showCustom = false;
-    this.dispatchEvent(new CustomEvent('colour-changed', {
+    this.dispatchEvent(new CustomEvent('color-changed', {
       detail: null,
       bubbles: true, composed: true,
     }));
@@ -405,13 +405,13 @@ class TeslaColourPicker extends LitElement {
           </div>
 
           <div class="picker-swatches">
-            ${FACTORY_COLOURS.map(fc => {
+            ${FACTORY_COLORS.map(fc => {
               const isAvail = avail.includes(fc.dir);
               const isSel = this.selected === fc.dir;
               return html`
                 <button
                   class="swatch-btn${isAvail ? '' : ' unavailable'}"
-                  @click=${isAvail ? () => this._selectColour(fc) : null}>
+                  @click=${isAvail ? () => this._selectColor(fc) : null}>
                   <div class="swatch-circle${isSel ? ' selected' : ''}"
                     style="background:${fc.swatch}"></div>
                   <span class="swatch-name">${fc.name}</span>
@@ -450,4 +450,4 @@ class TeslaColourPicker extends LitElement {
   }
 }
 
-customElements.define('tesla-colour-picker', TeslaColourPicker);
+customElements.define('tesla-color-picker', TeslaColorPicker);

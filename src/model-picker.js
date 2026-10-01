@@ -274,7 +274,7 @@ class TeslaModelPicker extends LitElement {
                 <div class="model-group">
                   ${m.variants.map(v => {
                     const sel = v.id === this.variant;
-                    const hasImages = v.colours.length > 1 || v.colours[0] !== 'neutral';
+                    const hasImages = v.colors.length > 1 || v.colors[0] !== 'neutral';
                     const avail = hasImages || sel;
                     return html`
                       <button class="model-item${sel ? ' selected' : ''}${avail ? '' : ' unavailable'}"

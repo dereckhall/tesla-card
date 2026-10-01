@@ -10,7 +10,7 @@ class TeslaMenuControls extends TeslaBase {
   static get properties() {
     return {
       ...super.properties,
-      _showTyres: { state: true },
+      _showTires: { state: true },
     };
   }
 
@@ -18,7 +18,7 @@ class TeslaMenuControls extends TeslaBase {
 
   constructor() {
     super();
-    this._showTyres = false;
+    this._showTires = false;
   }
 
   _formatPressure(val, sourceUnit, displayUnit) {
@@ -47,13 +47,13 @@ class TeslaMenuControls extends TeslaBase {
     const bgFile = pluggedIn ? 'controls-bg-charging.png' : 'controls-bg.png';
 
     // Tire pressure — only show toggle if entities exist
-    const hasTyres   = !!this._state(this.E.TIRE_FL);
+    const hasTires   = !!this._state(this.E.TIRE_FL);
     const sourceUnit = this._attr(this.E.TIRE_FL, 'unit_of_measurement') ?? 'psi';
-    const dispUnit   = this.tyreUnit ?? 'psi';
-    const tyreFL = this._formatPressure(this._val(this.E.TIRE_FL), sourceUnit, dispUnit);
-    const tyreFR = this._formatPressure(this._val(this.E.TIRE_FR), sourceUnit, dispUnit);
-    const tyreRL = this._formatPressure(this._val(this.E.TIRE_RL), sourceUnit, dispUnit);
-    const tyreRR = this._formatPressure(this._val(this.E.TIRE_RR), sourceUnit, dispUnit);
+    const dispUnit   = this.tireUnit ?? 'psi';
+    const tireFL = this._formatPressure(this._val(this.E.TIRE_FL), sourceUnit, dispUnit);
+    const tireFR = this._formatPressure(this._val(this.E.TIRE_FR), sourceUnit, dispUnit);
+    const tireRL = this._formatPressure(this._val(this.E.TIRE_RL), sourceUnit, dispUnit);
+    const tireRR = this._formatPressure(this._val(this.E.TIRE_RR), sourceUnit, dispUnit);
 
     return html`
       <div class="controls-menu${this.layout === 'landscape' ? ' landscape' : ''}">
@@ -62,9 +62,9 @@ class TeslaMenuControls extends TeslaBase {
             <span class="icon">${unsafeHTML(ICONS['chevron-left'])}</span>
           </button>
           <span class="panel-title">Controls</span>
-          ${hasTyres ? html`
-            <button class="panel-header-btn${this._showTyres ? ' active' : ''}"
-              @click=${() => { this._showTyres = !this._showTyres; }}>
+          ${hasTires ? html`
+            <button class="panel-header-btn${this._showTires ? ' active' : ''}"
+              @click=${() => { this._showTires = !this._showTires; }}>
               <img class="panel-header-img" src="${this._btnUrl('Tesla_TPMS.svg')}" alt="TPMS" />
             </button>` : ''}
         </div>
@@ -75,22 +75,22 @@ class TeslaMenuControls extends TeslaBase {
           ${this._hasCustomOverlay ? html`
             <div style="${this._customOverlayStyleFor(bgFile)}"></div>` : ''}
 
-          ${this._showTyres ? html`
+          ${this._showTires ? html`
             <!-- Tire pressure overlays -->
             <div class="tire-label tire-fl">
-              <span class="tire-value">${tyreFL}</span>
+              <span class="tire-value">${tireFL}</span>
               <span class="tire-unit">${dispUnit}</span>
             </div>
             <div class="tire-label tire-fr">
-              <span class="tire-value">${tyreFR}</span>
+              <span class="tire-value">${tireFR}</span>
               <span class="tire-unit">${dispUnit}</span>
             </div>
             <div class="tire-label tire-rl">
-              <span class="tire-value">${tyreRL}</span>
+              <span class="tire-value">${tireRL}</span>
               <span class="tire-unit">${dispUnit}</span>
             </div>
             <div class="tire-label tire-rr">
-              <span class="tire-value">${tyreRR}</span>
+              <span class="tire-value">${tireRR}</span>
               <span class="tire-unit">${dispUnit}</span>
             </div>
           ` : html`

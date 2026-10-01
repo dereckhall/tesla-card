@@ -13,9 +13,9 @@ export class TeslaBase extends LitElement {
     return {
       hass:         { type: Object },
       config:       { type: Object },
-      customColour: { type: Object },  // { h, s } | null — for custom CSS overlay
+      customColor: { type: Object },  // { h, s } | null — for custom CSS overlay
       layout:       { type: String },  // 'portrait' | 'landscape'
-      tyreUnit:     { type: String },  // 'psi' | 'bar'
+      tireUnit:     { type: String },  // 'psi' | 'bar'
     };
   }
 
@@ -57,11 +57,11 @@ export class TeslaBase extends LitElement {
   // ── Custom color overlay style ───────────────────────────────────────────
 
   get _hasCustomOverlay() {
-    return !!this.customColour && this.customColour.s > 0;
+    return !!this.customColor && this.customColor.s > 0;
   }
 
   _customOverlayStyleFor(imageFile) {
-    const c = this.customColour;
+    const c = this.customColor;
     if (!c || c.s === 0) return '';
     // Ensure h/s are safe integers before interpolating into CSS
     const h = Math.round(Number(c.h) || 0);

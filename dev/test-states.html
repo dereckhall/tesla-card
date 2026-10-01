@@ -92,7 +92,7 @@
 <div style="margin-bottom:10px; display:flex; gap:12px; align-items:center; flex-wrap:wrap">
   <div>
     <label style="font-size:12px; color:rgba(255,255,255,0.5)">Color:</label>
-    <select id="colour-select" style="background:#222; color:#eee; border:1px solid #444; border-radius:4px; padding:4px 8px; font-size:12px; margin-left:4px;">
+    <select id="color-select" style="background:#222; color:#eee; border:1px solid #444; border-radius:4px; padding:4px 8px; font-size:12px; margin-left:4px;">
       <option value="">Loading...</option>
     </select>
   </div>
@@ -124,7 +124,7 @@
 </div>
 
 <script>
-  let OVERLAYS_DIR = document.getElementById('colour-select').value;
+  let OVERLAYS_DIR = document.getElementById('color-select').value;
   let chargingMode = false; // false = offcharge, true = oncharge
   let chargingActive = false; // true = actively charging (green glow)
 
@@ -353,8 +353,8 @@
   }
 
   // ── Populate color dropdown from models.json ──
-  async function populateColours() {
-    const select = document.getElementById('colour-select');
+  async function populateColors() {
+    const select = document.getElementById('color-select');
     try {
       const resp = await fetch('/models.json');
       const data = await resp.json();
@@ -362,10 +362,10 @@
       const entries = [];
       for (const model of data.models) {
         for (const variant of model.variants) {
-          for (const colour of variant.colours) {
-            const path = `/dist/${model.id}/${variant.id}/${colour.id}/overlays`;
-            const label = `${model.name} ${variant.label} — ${colour.name}`;
-            entries.push({ path, label, hasImages: !!colour.hasImages });
+          for (const color of variant.colors) {
+            const path = `/dist/${model.id}/${variant.id}/${color.id}/overlays`;
+            const label = `${model.name} ${variant.label} — ${color.name}`;
+            entries.push({ path, label, hasImages: !!color.hasImages });
           }
         }
       }
@@ -386,14 +386,14 @@
 
   // ── Init ──
   async function init() {
-    await populateColours();
+    await populateColors();
     buildToggles();
     updatePreview();
     runTests();
   }
   init();
 
-  document.getElementById('colour-select').addEventListener('change', function () {
+  document.getElementById('color-select').addEventListener('change', function () {
     OVERLAYS_DIR = this.value;
     runTests();
     updatePreview();

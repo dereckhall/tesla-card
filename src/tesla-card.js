@@ -3,13 +3,13 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { sharedStyles, cardStyles } from './styles.js';
 import { getEntities, resolveEntityId } from './entity-config.js';
 import { ICONS } from './icons.js';
-import { FACTORY_COLOURS } from './recolour.js';
-import { TESLA_MODELS, getVariantColours } from './models.js';
+import { FACTORY_COLORS } from './recolor.js';
+import { TESLA_MODELS, getVariantColors } from './models.js';
 import './editor.js';
 import './menu-charger.js';
 import './menu-climate.js';
 import './menu-controls.js';
-import './colour-picker.js';
+import './color-picker.js';
 import './model-picker.js';
 
 // ─── Overlay image filenames ─────────────────────────────────────────────────
@@ -41,13 +41,13 @@ const COMBINED_OVERLAYS_ONCHARGE = {
 };
 
 // localStorage key prefixes
-const LS_COLOUR_PREFIX = 'tesla-card-colour-';
+const LS_COLOR_PREFIX = 'tesla-card-color-';
 const LS_MODEL_PREFIX  = 'tesla-card-model-';
 const LS_LAYOUT_PREFIX    = 'tesla-card-layout-';
 const LS_SIZE_PREFIX      = 'tesla-card-size-';
-const LS_TYRE_UNIT_PREFIX = 'tesla-card-tire-unit-';
+const LS_TIRE_UNIT_PREFIX = 'tesla-card-tire-unit-';
 const CARD_SIZES          = ['small', 'medium', 'large'];
-const TYRE_UNITS          = ['psi', 'bar'];
+const TIRE_UNITS          = ['psi', 'bar'];
 
 /** Clamp a value to a numeric range; returns null if not a finite number. */
 function _clampNum(v, min, max) {
@@ -67,13 +67,13 @@ class TeslaCard extends LitElement {
       config:          { type: Object },
       _menu:           { state: true },
       _imageError:     { state: true },
-      _settingsView:   { state: true },   // null | 'main' | 'model' | 'colour'
+      _settingsView:   { state: true },   // null | 'main' | 'model' | 'color'
       _modelOverride:  { state: true },   // { model, variant } | null
-      _colourOverride: { state: true },   // { dir } | { dir:'custom', h, s } | null
+      _colorOverride: { state: true },   // { dir } | { dir:'custom', h, s } | null
       _layout:         { state: true },   // 'portrait' | 'landscape'
       _settingsSlide:  { state: true },   // null | 'left' | 'right' — panel transition direction
       _cardSize:       { state: true },   // 'small' | 'medium' | 'large'
-      _tyreUnit:       { state: true },   // 'psi' | 'bar'
+      _tireUnit:       { state: true },   // 'psi' | 'bar'
     };
   }
 
@@ -88,11 +88,11 @@ class TeslaCard extends LitElement {
     this._imageError      = false;
     this._settingsView    = null;
     this._modelOverride   = null;
-    this._colourOverride  = null;
+    this._colorOverride  = null;
     this._layout          = 'portrait';
     this._settingsSlide   = null;
     this._cardSize        = 'medium';
-    this._tyreUnit        = 'psi';
+    this._tireUnit        = 'psi';
     this._baseConfig      = null;
     this._combinedAvail   = {};   // { 'nf+nr': true/false, 'ff+fr': true/false, 'oc_nf+nr': ..., 'all': ..., 'oc_all': ... }
     this._onchargeAvail   = false; // whether oncharge-base.png exists for current color
@@ -102,10 +102,10 @@ class TeslaCard extends LitElement {
     this._toggleClimate       = () => this._toggle('climate');
     this._toggleControls      = () => this._toggle('controls');
     this._handleCloseMenu     = () => { this._menu = null; };
-    this._handleColourChanged = (e) => this._onColourChanged(e);
+    this._handleColorChanged = (e) => this._onColorChanged(e);
     this._handleModelChanged  = (e) => this._onModelChanged(e);
     this._handleModelBack     = () => { this._settingsSlide = null; this._settingsView = 'main'; };
-    this._handleColourBack    = () => { this._settingsSlide = 'left'; this._settingsView = 'model'; };
+    this._handleColorBack    = () => { this._settingsSlide = 'left'; this._settingsView = 'model'; };
     this._handlePickerClose   = () => { this._settingsView = null; this._settingsSlide = null; };
   }
 
@@ -137,7 +137,7 @@ class TeslaCard extends LitElement {
       base.car_model   = this._modelOverride.model;
       base.car_variant = this._modelOverride.variant;
     }
-    const co = this._colourOverride;
+    const co = this._colorOverride;
     if (co) {
       base.car_color = co.dir === 'custom' ? 'neutral' : co.dir;
     }
@@ -195,22 +195,22 @@ class TeslaCard extends LitElement {
     super.connectedCallback();
     if (this._baseConfig) {
       this._restoreModel();
-      this._restoreColour();
+      this._restoreColor();
     }
     this._restoreLayout();
     this._restoreSize();
-    this._restoreTyreUnit();
+    this._restoreTireUnit();
   }
 
   // ── Color ──
 
-  _colourLsKey() {
-    return LS_COLOUR_PREFIX + (this._baseConfig?.car_name ?? 'default');
+  _colorLsKey() {
+    return LS_COLOR_PREFIX + (this._baseConfig?.car_name ?? 'default');
   }
 
-  _restoreColour() {
+  _restoreColor() {
     try {
-      const raw = localStorage.getItem(this._colourLsKey());
+      const raw = localStorage.getItem(this._colorLsKey());
       if (!raw) return;
       try {
         const parsed = JSON.parse(raw);
@@ -218,44 +218,44 @@ class TeslaCard extends LitElement {
           if (parsed.dir === 'custom') {
             const h = _clampNum(parsed.h, 0, 360);
             const s = _clampNum(parsed.s, 0, 100);
-            this._colourOverride = (h !== null && s !== null) ? { dir: 'custom', h, s } : null;
+            this._colorOverride = (h !== null && s !== null) ? { dir: 'custom', h, s } : null;
           } else {
-            this._colourOverride = { dir: parsed.dir };
+            this._colorOverride = { dir: parsed.dir };
           }
         }
       } catch {
         // Legacy plain string format
-        this._colourOverride = { dir: raw };
+        this._colorOverride = { dir: raw };
       }
       this._applyConfig();
     } catch { /* ignore corrupt localStorage */ }
   }
 
-  _persistColour() {
+  _persistColor() {
     try {
-      if (this._colourOverride) {
-        localStorage.setItem(this._colourLsKey(), JSON.stringify(this._colourOverride));
+      if (this._colorOverride) {
+        localStorage.setItem(this._colorLsKey(), JSON.stringify(this._colorOverride));
       } else {
-        localStorage.removeItem(this._colourLsKey());
+        localStorage.removeItem(this._colorLsKey());
       }
     } catch { /* localStorage might be full or disabled */ }
   }
 
-  _onColourChanged(e) {
+  _onColorChanged(e) {
     const detail = e.detail;
     if (!detail) {
-      this._colourOverride = null;
+      this._colorOverride = null;
     } else if (detail.dir === 'custom') {
       const h = _clampNum(detail.h, 0, 360);
       const s = _clampNum(detail.s, 0, 100);
       if (h !== null && s !== null) {
-        this._colourOverride = { dir: 'custom', h, s };
+        this._colorOverride = { dir: 'custom', h, s };
       }
     } else {
-      this._colourOverride = { dir: detail.dir };
+      this._colorOverride = { dir: detail.dir };
     }
     this._applyConfig();
-    this._persistColour();
+    this._persistColor();
     this._imageError = false;
   }
 
@@ -292,12 +292,12 @@ class TeslaCard extends LitElement {
     const { model, variant } = e.detail;
     this._modelOverride = { model, variant };
     // Reset color if current color isn't available for the new model/variant
-    const co = this._colourOverride;
+    const co = this._colorOverride;
     if (co && co.dir !== 'custom') {
-      const availColours = getVariantColours(model, variant);
-      if (!availColours.includes(co.dir)) {
-        this._colourOverride = null;
-        this._persistColour();
+      const availColors = getVariantColors(model, variant);
+      if (!availColors.includes(co.dir)) {
+        this._colorOverride = null;
+        this._persistColor();
       }
     }
     this._applyConfig();
@@ -305,7 +305,7 @@ class TeslaCard extends LitElement {
     this._imageError = false;
     // Forward to color picker
     this._settingsSlide = 'right';
-    this._settingsView = 'colour';
+    this._settingsView = 'color';
   }
 
   // ── Layout ──
@@ -359,27 +359,27 @@ class TeslaCard extends LitElement {
 
   // ── Tire Unit ──
 
-  _tyreUnitLsKey() {
-    return LS_TYRE_UNIT_PREFIX + (this._baseConfig?.car_name ?? 'default');
+  _tireUnitLsKey() {
+    return LS_TIRE_UNIT_PREFIX + (this._baseConfig?.car_name ?? 'default');
   }
 
-  _restoreTyreUnit() {
+  _restoreTireUnit() {
     try {
-      const raw = localStorage.getItem(this._tyreUnitLsKey());
-      if (raw && TYRE_UNITS.includes(raw)) this._tyreUnit = raw;
+      const raw = localStorage.getItem(this._tireUnitLsKey());
+      if (raw && TIRE_UNITS.includes(raw)) this._tireUnit = raw;
     } catch { /* ignore */ }
   }
 
-  _persistTyreUnit() {
+  _persistTireUnit() {
     try {
-      localStorage.setItem(this._tyreUnitLsKey(), this._tyreUnit);
+      localStorage.setItem(this._tireUnitLsKey(), this._tireUnit);
     } catch { /* */ }
   }
 
-  _setTyreUnit(unit) {
-    if (this._tyreUnit === unit) return;
-    this._tyreUnit = unit;
-    this._persistTyreUnit();
+  _setTireUnit(unit) {
+    if (this._tireUnit === unit) return;
+    this._tireUnit = unit;
+    this._persistTireUnit();
   }
 
   // ─── Image URL helpers ───────────────────────────────────────────────────
@@ -401,14 +401,14 @@ class TeslaCard extends LitElement {
   // ─── Custom color helpers ───────────────────────────────────────────────
 
   /** Returns { h, s } for custom color, or null */
-  get _customColour() {
-    const co = this._colourOverride;
+  get _customColor() {
+    const co = this._colorOverride;
     if (!co || co.dir !== 'custom') return null;
     return { h: co.h, s: co.s };
   }
 
   get _hasCustomOverlay() {
-    const c = this._customColour;
+    const c = this._customColor;
     return !!c && c.s > 0;
   }
 
@@ -419,9 +419,9 @@ class TeslaCard extends LitElement {
   }
 
   _customOverlayStyleFor(imageFile) {
-    const c = this._customColour;
+    const c = this._customColor;
     if (!c || c.s === 0) return '';
-    // h and s are already clamped numerics via _onColourChanged / _restoreColour
+    // h and s are already clamped numerics via _onColorChanged / _restoreColor
     const h = Math.round(c.h);
     const s = Math.round(c.s);
     const mask = this._maskUrl(imageFile);
@@ -517,7 +517,7 @@ class TeslaCard extends LitElement {
     if (!this.config || !this.hass) return html``;
 
     const menu = this._menu;
-    const co = this._colourOverride;
+    const co = this._colorOverride;
 
     // ── Status values ──
     const batRaw    = this._val(this.E.BATTERY_LEVEL);
@@ -719,11 +719,11 @@ class TeslaCard extends LitElement {
       : this.config.car_model;
 
     const isCustom     = co?.dir === 'custom';
-    const curColourObj = isCustom ? null : FACTORY_COLOURS.find(c => c.dir === this.config.car_color);
-    const colourSub    = isCustom ? 'Custom' : (curColourObj?.name ?? this.config.car_color);
+    const curColorObj = isCustom ? null : FACTORY_COLORS.find(c => c.dir === this.config.car_color);
+    const colorSub    = isCustom ? 'Custom' : (curColorObj?.name ?? this.config.car_color);
 
     // Available colors for current model/variant
-    const availColours = getVariantColours(this.config.car_model, this.config.car_variant);
+    const availColors = getVariantColors(this.config.car_model, this.config.car_variant);
     const isLandscape = this._layout === 'landscape';
     const sizeClass   = this._cardSize !== 'medium' ? `size-${this._cardSize}` : '';
 
@@ -878,7 +878,7 @@ class TeslaCard extends LitElement {
           <tesla-menu-climate
             .hass=${this.hass}
             .config=${this.config}
-            .customColour=${this._customColour}
+            .customColor=${this._customColor}
             .layout=${this._layout}
 
             @close-menu=${this._handleCloseMenu}>
@@ -888,9 +888,9 @@ class TeslaCard extends LitElement {
           <tesla-menu-controls
             .hass=${this.hass}
             .config=${this.config}
-            .customColour=${this._customColour}
+            .customColor=${this._customColor}
             .layout=${this._layout}
-            .tyreUnit=${this._tyreUnit}
+            .tireUnit=${this._tireUnit}
             @close-menu=${this._handleCloseMenu}>
           </tesla-menu-controls>` : ''}
 
@@ -910,7 +910,7 @@ class TeslaCard extends LitElement {
                   <span class="icon settings-row-icon">${unsafeHTML(ICONS.car)}</span>
                   <div class="settings-row-text">
                     <span class="settings-row-label">Model & Color</span>
-                    <span class="settings-row-sub">${modelSub} · ${colourSub}</span>
+                    <span class="settings-row-sub">${modelSub} · ${colorSub}</span>
                   </div>
                   <span class="icon settings-row-chevron">${unsafeHTML(ICONS['chevron-right'])}</span>
                 </button>
@@ -937,14 +937,14 @@ class TeslaCard extends LitElement {
                   <span class="icon settings-row-chevron">${unsafeHTML(ICONS['chevron-right'])}</span>
                 </button>
                 <div class="settings-row settings-row-static">
-                  <span class="icon settings-row-icon">${unsafeHTML(ICONS.tyre)}</span>
+                  <span class="icon settings-row-icon">${unsafeHTML(ICONS.tire)}</span>
                   <div class="settings-row-text">
                     <span class="settings-row-label">Tire Units</span>
                   </div>
                   <div class="settings-size-control">
-                    ${TYRE_UNITS.map(u => html`
-                      <button class="settings-size-btn${this._tyreUnit === u ? ' selected' : ''}"
-                        @click=${(e) => { e.stopPropagation(); this._setTyreUnit(u); }}>
+                    ${TIRE_UNITS.map(u => html`
+                      <button class="settings-size-btn${this._tireUnit === u ? ' selected' : ''}"
+                        @click=${(e) => { e.stopPropagation(); this._setTireUnit(u); }}>
                         ${u}
                       </button>`)}
                   </div>
@@ -966,18 +966,18 @@ class TeslaCard extends LitElement {
           </tesla-model-picker>` : ''}
 
         <!-- ── Settings: color picker ─────────────────────── -->
-        ${this._settingsView === 'colour' ? html`
-          <tesla-colour-picker
+        ${this._settingsView === 'color' ? html`
+          <tesla-color-picker
             .selected=${co?.dir ?? this.config.car_color}
-            .available=${availColours}
+            .available=${availColors}
             .customH=${co?.dir === 'custom' ? co.h : 0}
             .customS=${co?.dir === 'custom' ? co.s : 80}
             showBack
             slide-from=${this._settingsSlide ?? 'up'}
-            @colour-changed=${this._handleColourChanged}
-            @picker-back=${this._handleColourBack}
+            @color-changed=${this._handleColorChanged}
+            @picker-back=${this._handleColorBack}
             @picker-close=${this._handlePickerClose}>
-          </tesla-colour-picker>` : ''}
+          </tesla-color-picker>` : ''}
 
       </ha-card>
     `;

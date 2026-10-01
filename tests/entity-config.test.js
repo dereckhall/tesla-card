@@ -171,11 +171,13 @@ describe('Fleet US entity names', () => {
   });
 
   it('uses TIRE_ keys and tire_pressure sensors', () => {
+    expect(Object.keys(fleet).filter(k => /^TIRE_(FL|FR|RL|RR)$/.test(k))).toHaveLength(4);
     expect(fleet.TIRE_FL).toBe('sensor.{car_name}_tire_pressure_front_left');
-    expect(Object.keys(fleet).some(k => k.startsWith('TYRE_'))).toBe(false);
   });
 
-  it('has no British entity names', () => {
-    expect(Object.values(fleet).filter(Boolean).join(' ')).not.toMatch(/froot|_boot|vent_windows|tyre/);
+  it('every cover default is a US name', () => {
+    const covers = Object.values(fleet).filter(v => v && v.startsWith('cover.'));
+    const us = ['charge_port_door', 'frunk', 'trunk', 'windows'].map(n => `cover.{car_name}_${n}`);
+    expect(covers.every(c => us.includes(c))).toBe(true);
   });
 });

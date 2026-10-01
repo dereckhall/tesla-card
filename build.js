@@ -66,15 +66,15 @@ if (watch) {
         // Only copy variant dirs (contain a dot, e.g. "3.1", "Y.1", "S.1")
         if (!variant.includes('.')) continue;
 
-        for (const colour of readdirSync(variantPath)) {
-          const colourPath = join(variantPath, colour);
-          if (!statSync(colourPath).isDirectory()) continue;
-          if (colour === '_previews' || colour === 'RAW') continue;
+        for (const color of readdirSync(variantPath)) {
+          const colorPath = join(variantPath, color);
+          if (!statSync(colorPath).isDirectory()) continue;
+          if (color === '_previews' || color === 'RAW') continue;
 
-          const destColour = join(destDir, model, variant, colour);
-          mkdirSync(destColour, { recursive: true });
+          const destColor = join(destDir, model, variant, color);
+          mkdirSync(destColor, { recursive: true });
 
-          copyDir(colourPath, destColour);
+          copyDir(colorPath, destColor);
         }
       }
     }

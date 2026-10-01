@@ -290,7 +290,7 @@ export const ICONS = {
   </svg>`,
 
   // Tire pressure — wheel with "bar" label (matches Tesla app TPMS icon)
-  tyre: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  tire: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="12" cy="12" r="9" />
     <circle cx="12" cy="12" r="4" />

@@ -7,7 +7,7 @@
         {
           "id": "3.1",
           "label": "2017\u00e2\u20ac\u201c2023",
-          "colours": [
+          "colors": [
             {
               "id": "red_multi_coat",
               "name": "Red Multi-Coat",
@@ -45,7 +45,7 @@
         {
           "id": "3.2",
           "label": "2024+ Highland",
-          "colours": [
+          "colors": [
             {
               "id": "pearl_white",
               "name": "Pearl White",
@@ -72,7 +72,7 @@
               "swatch": "#850029"
             },
             {
-              "id": "stealth_grey",
+              "id": "stealth_gray",
               "name": "Stealth Grey",
               "swatch": "#515356"
             }
@@ -87,7 +87,7 @@
         {
           "id": "Y.1",
           "label": "2020\u00e2\u20ac\u201c2024",
-          "colours": [
+          "colors": [
             {
               "id": "pearl_white_multi_coat",
               "name": "Pearl White Multi-Coat",
@@ -125,7 +125,7 @@
               "swatch": "#9e9a91"
             },
             {
-              "id": "stealth_grey",
+              "id": "stealth_gray",
               "name": "Stealth Grey",
               "swatch": "#515356"
             }
@@ -134,7 +134,7 @@
         {
           "id": "Y.2",
           "label": "2025+ Juniper",
-          "colours": [
+          "colors": [
             {
               "id": "pearl_white",
               "name": "Pearl White",
@@ -162,7 +162,7 @@
               "swatch": "#850029"
             },
             {
-              "id": "stealth_grey",
+              "id": "stealth_gray",
               "name": "Stealth Grey",
               "swatch": "#515356"
             }
@@ -177,7 +177,7 @@
         {
           "id": "S.1",
           "label": "2012\u00e2\u20ac\u201c2021",
-          "colours": [
+          "colors": [
             {
               "id": "pearl_white_multi_coat",
               "name": "Pearl White Multi-Coat",
@@ -213,7 +213,7 @@
         {
           "id": "S.2",
           "label": "2021+ Refresh",
-          "colours": [
+          "colors": [
             {
               "id": "pearl_white_multi_coat",
               "name": "Pearl White Multi-Coat",
@@ -245,7 +245,7 @@
               "swatch": "#9e9a91"
             },
             {
-              "id": "stealth_grey",
+              "id": "stealth_gray",
               "name": "Stealth Grey",
               "swatch": "#515356"
             }
@@ -260,7 +260,7 @@
         {
           "id": "X.1",
           "label": "2015\u00e2\u20ac\u201c2021",
-          "colours": [
+          "colors": [
             {
               "id": "solid_black",
               "name": "Solid Black",
@@ -296,7 +296,7 @@
         {
           "id": "X.2",
           "label": "2021+ Refresh",
-          "colours": [
+          "colors": [
             {
               "id": "pearl_white_multi_coat",
               "name": "Pearl White Multi-Coat",
@@ -328,7 +328,7 @@
               "swatch": "#9e9a91"
             },
             {
-              "id": "stealth_grey",
+              "id": "stealth_gray",
               "name": "Stealth Grey",
               "swatch": "#515356"
             }
@@ -343,7 +343,7 @@
         {
           "id": "CT.1",
           "label": "2024+",
-          "colours": [
+          "colors": [
             {
               "id": "stainless_steel",
               "name": "Stainless Steel",

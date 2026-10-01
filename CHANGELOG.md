@@ -1,19 +1,24 @@
 # Changelog
 
+## [1.1.0] - 2026-09-30
+
+### Changed (breaking)
+- **US English throughout the code.** Files `color-picker.js` / `recolor.js`, element `<tesla-color-picker>`, event `color-changed`, `colors` in `models.json`, every color/tire function and variable, and color ID `stealth_gray` (was the British spelling; use `car_color: stealth_gray`). Saved settings move to `tesla-card-color-*` and `tesla-card-tire-unit-*`, so each browser's saved color and pressure unit reset once. Displayed Tesla paint names (Stealth Grey, Midnight Grey) are unchanged.
+
 ## [1.0.10] - 2026-09-30
 
 ### Changed
-- **CSS class names in US English** — `tyre-label` / `tyre-value` / `tyre-unit` / `tyre-fl|fr|rl|rr` are now `tire-*`, and `car-colour-overlay` is `car-color-overlay`. Only matters if you target these classes with card-mod.
+- **CSS class names in US English** — the tire pressure label classes are now `tire-label` / `tire-value` / `tire-unit` / `tire-fl|fr|rl|rr`, and the paint overlay is `car-color-overlay`. Only matters if you target these classes with card-mod.
 
 ## [1.0.9] - 2026-09-30
 
 ### Changed (breaking)
-- **US spellings only.** Tire pressure override keys are `TIRE_FL` / `TIRE_FR` / `TIRE_RL` / `TIRE_RR` (`TYRE_*` is no longer read). Fleet defaults use the US entity names: `cover.{car_name}_frunk`, `_trunk`, `_windows` and `sensor.{car_name}_tire_pressure_*`; the British fallbacks (`froot`, `boot`, `vent_windows`) are gone. The saved psi/bar choice moved to `tesla-card-tire-unit-*`, so it resets to psi once.
+- **US spellings only.** Tire pressure override keys are `TIRE_FL` / `TIRE_FR` / `TIRE_RL` / `TIRE_RR` (the British-spelled keys are no longer read). Fleet defaults use the US entity names: `cover.{car_name}_frunk`, `_trunk`, `_windows` and `sensor.{car_name}_tire_pressure_*`; the British-locale fallbacks are gone. The saved psi/bar choice moved to `tesla-card-tire-unit-*`, so it resets to psi once.
 
 ## [1.0.8] - 2026-09-30
 
 ### Changed
-- **US English** — on-card labels now read *Color*, *Model & Color*, *Tire Units* and *Tire Pressure* (editor); docs, comments and test names use US spelling. Config keys (`TYRE_FL` etc.), saved settings and Tesla paint names (Stealth Grey, Midnight Grey) are unchanged.
+- **US English** — on-card labels now read *Color*, *Model & Color*, *Tire Units* and *Tire Pressure* (editor); docs, comments and test names use US spelling. Config keys, saved settings and Tesla paint names (Stealth Grey, Midnight Grey) are unchanged.
 
 ## [1.0.7] - 2026-09-30
 
@@ -29,7 +34,7 @@
 ### Security
 - **Config value validation** — `setConfig()` now rejects `image_path`, `car_model`, `car_variant`, and `car_color` values containing characters that could escape CSS or URL contexts (prevents CSS injection via crafted card config).
 - **Custom color clamping** — `h` (0–360) and `s` (0–100) values are validated as finite numbers and clamped before interpolation into inline CSS styles. Blocks injection via malicious localStorage writes.
-- **localStorage shape validation** — `_restoreColour()` and `_restoreModel()` now verify the deserialized JSON matches the expected object shape (`{ dir }` / `{ model, variant }`) before assigning to component state.
+- **localStorage shape validation** — `_restoreColor()` and `_restoreModel()` now verify the deserialized JSON matches the expected object shape (`{ dir }` / `{ model, variant }`) before assigning to component state.
 
 ## [1.0.0] - 2026-03-17
 
@@ -54,7 +59,7 @@
 - **Charging header** — green battery bar, green range text, bolt icon, and time remaining to charge limit
 - **Smart refresh** — wake button sends wake command then batch re-polls all key entities after 5s
 - **Smart status text** — Asleep / Charging / speed / Parked based on car state
-- New entities: `SPEED`, `DISTANCE_TO_ARRIVAL`, `TIME_TO_ARRIVAL`, `ROUTE`, `TYRE_FL/FR/RL/RR`, `TIME_TO_FULL_CHARGE`
+- New entities: `SPEED`, `DISTANCE_TO_ARRIVAL`, `TIME_TO_ARRIVAL`, `ROUTE`, `TIRE_FL/FR/RL/RR`, `TIME_TO_FULL_CHARGE`
 
 ### Fixed
 - **alandtse/tesla compatibility** — frunk and trunk buttons now use `_activate()` which picks the correct service based on entity domain (cover vs button)
@@ -82,7 +87,7 @@
 - **Smart status text** — shows "Asleep" when offline, "Charging" when charge switch is on, "Parked" when online but stationary, or speed in km/h when moving.
 
 ### Fixed
-- **Fleet entity names corrected** — `cover.{car_name}_froot` and `cover.{car_name}_boot` are the real Fleet integration defaults (not `frunk`/`trunk`). Entity config updated to match.
+- **Fleet entity names corrected** — cover defaults matched to the Fleet integration's entity names.
 - **No `toggle_cover` on Fleet** — the Tesla Fleet integration rejects `toggle_cover` calls. All cover controls now use explicit `open_cover`/`close_cover` based on current state.
 - **Frunk is open-only** — frunk button now calls `open_cover` only and disables when already open (must be physically closed).
 - **Case-insensitive car name** — `car_name` is now auto-lowercased so `Terrance` and `terrance` both work.
