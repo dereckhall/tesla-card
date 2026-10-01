@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.9] - 2026-09-30
+
+### Changed (breaking)
+- **US spellings only.** Tire pressure override keys are `TIRE_FL` / `TIRE_FR` / `TIRE_RL` / `TIRE_RR` (`TYRE_*` is no longer read). Fleet defaults use the US entity names: `cover.{car_name}_frunk`, `_trunk`, `_windows` and `sensor.{car_name}_tire_pressure_*`; the British fallbacks (`froot`, `boot`, `vent_windows`) are gone. The saved psi/bar choice moved to `tesla-card-tire-unit-*`, so it resets to psi once.
+
 ## [1.0.8] - 2026-09-30
 
 ### Changed

@@ -47,13 +47,13 @@ class TeslaMenuControls extends TeslaBase {
     const bgFile = pluggedIn ? 'controls-bg-charging.png' : 'controls-bg.png';
 
     // Tire pressure — only show toggle if entities exist
-    const hasTyres   = !!this._state(this.E.TYRE_FL);
-    const sourceUnit = this._attr(this.E.TYRE_FL, 'unit_of_measurement') ?? 'psi';
+    const hasTyres   = !!this._state(this.E.TIRE_FL);
+    const sourceUnit = this._attr(this.E.TIRE_FL, 'unit_of_measurement') ?? 'psi';
     const dispUnit   = this.tyreUnit ?? 'psi';
-    const tyreFL = this._formatPressure(this._val(this.E.TYRE_FL), sourceUnit, dispUnit);
-    const tyreFR = this._formatPressure(this._val(this.E.TYRE_FR), sourceUnit, dispUnit);
-    const tyreRL = this._formatPressure(this._val(this.E.TYRE_RL), sourceUnit, dispUnit);
-    const tyreRR = this._formatPressure(this._val(this.E.TYRE_RR), sourceUnit, dispUnit);
+    const tyreFL = this._formatPressure(this._val(this.E.TIRE_FL), sourceUnit, dispUnit);
+    const tyreFR = this._formatPressure(this._val(this.E.TIRE_FR), sourceUnit, dispUnit);
+    const tyreRL = this._formatPressure(this._val(this.E.TIRE_RL), sourceUnit, dispUnit);
+    const tyreRR = this._formatPressure(this._val(this.E.TIRE_RR), sourceUnit, dispUnit);
 
     return html`
       <div class="controls-menu${this.layout === 'landscape' ? ' landscape' : ''}">

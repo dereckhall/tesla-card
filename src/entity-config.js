@@ -75,23 +75,23 @@ const FLEET = {
   HORN:                 'button.{car_name}_honk_horn',
   FLASH_LIGHTS:         'button.{car_name}_flash_lights',
   REMOTE_START:         'button.{car_name}_keyless_driving',
-  OPEN_FRUNK:           'cover.{car_name}_froot',
-  OPEN_TRUNK:           'cover.{car_name}_boot',
+  OPEN_FRUNK:           'cover.{car_name}_frunk',
+  OPEN_TRUNK:           'cover.{car_name}_trunk',
   FORCE_UPDATE:         'button.{car_name}_wake',
 
   // Covers
-  WINDOWS_COVER:        'cover.{car_name}_vent_windows',
-  FRUNK_COVER:          'cover.{car_name}_froot',
+  WINDOWS_COVER:        'cover.{car_name}_windows',
+  FRUNK_COVER:          'cover.{car_name}_frunk',
   CHARGER_DOOR:         'cover.{car_name}_charge_port_door',
 
   // Sensors — charging session
   ENERGY_ADDED:         'sensor.{car_name}_charge_energy_added',
 
   // Tire pressure
-  TYRE_FL:              'sensor.{car_name}_tyre_pressure_front_left',
-  TYRE_FR:              'sensor.{car_name}_tyre_pressure_front_right',
-  TYRE_RL:              'sensor.{car_name}_tyre_pressure_rear_left',
-  TYRE_RR:              'sensor.{car_name}_tyre_pressure_rear_right',
+  TIRE_FL:              'sensor.{car_name}_tire_pressure_front_left',
+  TIRE_FR:              'sensor.{car_name}_tire_pressure_front_right',
+  TIRE_RL:              'sensor.{car_name}_tire_pressure_rear_left',
+  TIRE_RR:              'sensor.{car_name}_tire_pressure_rear_right',
 
   // Time to full charge
   TIME_TO_FULL_CHARGE:  'sensor.{car_name}_time_to_full_charge',
@@ -190,10 +190,10 @@ const CUSTOM = {
   ENERGY_ADDED:         'sensor.{car_name}_energy_added',
 
   // Tire pressure
-  TYRE_FL: 'sensor.{car_name}_tpms_front_left',
-  TYRE_FR: 'sensor.{car_name}_tpms_front_right',
-  TYRE_RL: 'sensor.{car_name}_tpms_rear_left',
-  TYRE_RR: 'sensor.{car_name}_tpms_rear_right',
+  TIRE_FL: 'sensor.{car_name}_tpms_front_left',
+  TIRE_FR: 'sensor.{car_name}_tpms_front_right',
+  TIRE_RL: 'sensor.{car_name}_tpms_rear_left',
+  TIRE_RR: 'sensor.{car_name}_tpms_rear_right',
 
   // Time to full charge
   TIME_TO_FULL_CHARGE:  'sensor.{car_name}_time_charge_complete',
@@ -273,10 +273,10 @@ export const ENTITY_GROUPS = [
     { key: 'FORCE_UPDATE',  label: 'Wake / Refresh', domain: 'button' },
   ]},
   { label: 'Tire Pressure', keys: [
-    { key: 'TYRE_FL', label: 'Front Left',  domain: 'sensor' },
-    { key: 'TYRE_FR', label: 'Front Right', domain: 'sensor' },
-    { key: 'TYRE_RL', label: 'Rear Left',   domain: 'sensor' },
-    { key: 'TYRE_RR', label: 'Rear Right',  domain: 'sensor' },
+    { key: 'TIRE_FL', label: 'Front Left',  domain: 'sensor' },
+    { key: 'TIRE_FR', label: 'Front Right', domain: 'sensor' },
+    { key: 'TIRE_RL', label: 'Rear Left',   domain: 'sensor' },
+    { key: 'TIRE_RR', label: 'Rear Right',  domain: 'sensor' },
   ]},
   { label: 'Navigation & Location', keys: [
     { key: 'SPEED',               label: 'Speed',              domain: 'sensor' },
@@ -347,17 +347,3 @@ export function resolveEntityId(template, carName, overrides) {
 export function entityId(template, carName) {
   return template ? template.replace('{car_name}', (carName ?? '').toLowerCase()) : null;
 }
-
-/**
- * Fleet entity names vary by HA locale (British: froot/boot/vent_windows,
- * American: frunk/trunk/windows). This map provides alternatives to try
- * when the primary entity is not found.
- */
-export const FLEET_LOCALE_ALTS = {
-  'cover.{car_name}_froot':        'cover.{car_name}_frunk',
-  'cover.{car_name}_frunk':        'cover.{car_name}_froot',
-  'cover.{car_name}_boot':         'cover.{car_name}_trunk',
-  'cover.{car_name}_trunk':        'cover.{car_name}_boot',
-  'cover.{car_name}_vent_windows': 'cover.{car_name}_windows',
-  'cover.{car_name}_windows':      'cover.{car_name}_vent_windows',
-};

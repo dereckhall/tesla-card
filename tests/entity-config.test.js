@@ -4,7 +4,6 @@ import {
   resolveEntityId,
   getEntities,
   ENTITY_GROUPS,
-  FLEET_LOCALE_ALTS,
 } from '../src/entity-config.js';
 
 // ── entityId() ─────────────────────────────────────────────────────────────
@@ -160,21 +159,23 @@ describe('ENTITY_GROUPS', () => {
   });
 });
 
-// ── FLEET_LOCALE_ALTS ──────────────────────────────────────────────────────
+// ── US entity names only ────────────────────────────────────────────────────
 
-describe('FLEET_LOCALE_ALTS', () => {
-  it('provides bidirectional locale alternatives', () => {
-    expect(FLEET_LOCALE_ALTS['cover.{car_name}_froot']).toBe('cover.{car_name}_frunk');
-    expect(FLEET_LOCALE_ALTS['cover.{car_name}_frunk']).toBe('cover.{car_name}_froot');
+describe('Fleet US entity names', () => {
+  const fleet = getEntities('fleet');
+
+  it('uses frunk/trunk/windows covers', () => {
+    expect(fleet.OPEN_FRUNK).toBe('cover.{car_name}_frunk');
+    expect(fleet.OPEN_TRUNK).toBe('cover.{car_name}_trunk');
+    expect(fleet.WINDOWS_COVER).toBe('cover.{car_name}_windows');
   });
 
-  it('provides boot/trunk alternatives', () => {
-    expect(FLEET_LOCALE_ALTS['cover.{car_name}_boot']).toBe('cover.{car_name}_trunk');
-    expect(FLEET_LOCALE_ALTS['cover.{car_name}_trunk']).toBe('cover.{car_name}_boot');
+  it('uses TIRE_ keys and tire_pressure sensors', () => {
+    expect(fleet.TIRE_FL).toBe('sensor.{car_name}_tire_pressure_front_left');
+    expect(Object.keys(fleet).some(k => k.startsWith('TYRE_'))).toBe(false);
   });
 
-  it('provides vent_windows/windows alternatives', () => {
-    expect(FLEET_LOCALE_ALTS['cover.{car_name}_vent_windows']).toBe('cover.{car_name}_windows');
-    expect(FLEET_LOCALE_ALTS['cover.{car_name}_windows']).toBe('cover.{car_name}_vent_windows');
+  it('has no British entity names', () => {
+    expect(Object.values(fleet).filter(Boolean).join(' ')).not.toMatch(/froot|_boot|vent_windows|tyre/);
   });
 });

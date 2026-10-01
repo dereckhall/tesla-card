@@ -1,5 +1,5 @@
 import { LitElement } from 'lit';
-import { resolveEntityId, getEntities, FLEET_LOCALE_ALTS } from './entity-config.js';
+import { resolveEntityId, getEntities } from './entity-config.js';
 
 /**
  * Shared base class for tesla-card submenu components.
@@ -26,12 +26,7 @@ export class TeslaBase extends LitElement {
   // ── Entity helpers ──────────────────────────────────────────────────────────
 
   _eid(t) {
-    const id = resolveEntityId(t, this.config.car_name, this.config.entity_overrides);
-    if (id && !this.hass?.states[id] && FLEET_LOCALE_ALTS[t]) {
-      const alt = resolveEntityId(FLEET_LOCALE_ALTS[t], this.config.car_name, this.config.entity_overrides);
-      if (alt && this.hass?.states[alt]) return alt;
-    }
-    return id;
+    return resolveEntityId(t, this.config.car_name, this.config.entity_overrides);
   }
   _state(t)    { const id = this._eid(t); return id ? this.hass?.states[id] : undefined; }
   _val(t)      { return this._state(t)?.state; }

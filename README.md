@@ -159,9 +159,9 @@ All entity IDs are derived from your `car_name` value automatically. The card ma
 | `lock.{car_name}_lock` | Door lock/unlock |
 | `climate.{car_name}_climate` | HVAC on/off, target temperature, camp/dog mode presets |
 | `cover.{car_name}_charge_port_door` | Open/close charge port |
-| `cover.{car_name}_froot` | Open frunk |
-| `cover.{car_name}_boot` | Open/close trunk |
-| `cover.{car_name}_vent_windows` | Vent/close windows |
+| `cover.{car_name}_frunk` | Open frunk |
+| `cover.{car_name}_trunk` | Open/close trunk |
+| `cover.{car_name}_windows` | Vent/close windows |
 | `number.{car_name}_charge_limit` | Charge limit slider |
 | `number.{car_name}_charge_current` | Charging amps slider |
 | `switch.{car_name}_sentry_mode` | Sentry mode toggle |
