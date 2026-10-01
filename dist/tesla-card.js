@@ -282,8 +282,8 @@ var hi=Object.defineProperty;var di=(r,t,e)=>t in r?hi(r,t,{enumerable:!0,config
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 36px;            /* same box as .panel-back so the arrow lines up across screens */
+    height: 36px;
     background: transparent;
     border: none;
     color: rgba(255,255,255,0.65);

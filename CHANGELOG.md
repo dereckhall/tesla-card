@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.4] - 2026-09-30
+
+### Fixed
+- Climate back arrow uses the same 36px button as the other screens, so it lines up exactly (it sat 2px further right).
+
 ## [1.3.3] - 2026-09-30
 
 ### Fixed
