@@ -267,9 +267,6 @@ export const climateStyles = css`
     transition: height 0.35s ease;
   }
 
-  .clim-car-area.clim-car-collapsed {
-    height: 260px;
-  }
 
   /* Inner wrapper takes the image's natural size; seats are
      positioned as percentages of the image, so they always
@@ -381,7 +378,7 @@ export const climateStyles = css`
 
   /* Model Y 2025+ (Y.2) image: whole car incl. charge cable, like the app;
      heater icons on the wheel and on each seat back */
-  .climate-menu[data-variant="Y.2"] .clim-car-area:not(.clim-car-collapsed) { height: auto; aspect-ratio: 1267 / 1720; }
+  .climate-menu[data-variant="Y.2"] .clim-car-area { height: auto; aspect-ratio: 1267 / 1720; }
   .climate-menu[data-variant="Y.2"] .clim-steering-zone { top: 11.4%; left: 37.7%; }
   .climate-menu[data-variant="Y.2"] .clim-steering-zone .btn-img { width: 46px; height: 46px; margin-bottom: -2px; }
   .climate-menu[data-variant="Y.2"] .clim-seat-fl { top: 20.5%; left: 37.9%; }
@@ -415,8 +412,6 @@ export const climateStyles = css`
     padding: 14px 0 10px;
     background: transparent;
     border: none;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
   }
 
   .clim-handle-pill {
@@ -427,7 +422,6 @@ export const climateStyles = css`
     transition: background 0.15s ease;
   }
 
-  .clim-handle:hover .clim-handle-pill { background: rgba(255,255,255,0.35); }
 
   /* Interior / Exterior temp info */
   .clim-temp-info {
@@ -702,9 +696,6 @@ export const climateStyles = css`
   }
 
   /* Ignore collapse in landscape — always show full car */
-  .landscape .clim-car-area.clim-car-collapsed {
-    height: auto;
-  }
 
   .landscape .clim-car-inner {
     width: 100%;

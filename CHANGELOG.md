@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.2] - 2026-09-30
+
+### Changed
+- **Climate handle is decoration only** — the gray pill above the temperatures no longer does anything when tapped (it only shrank the car image, which nobody would guess). It stays as a visual divider, like in the Tesla app.
+
 ## [1.3.1] - 2026-09-30
 
 ### Changed

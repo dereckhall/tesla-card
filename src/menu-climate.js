@@ -11,7 +11,6 @@ class TeslaMenuClimate extends TeslaBase {
     return {
       ...super.properties,
       _pendingTemp:  { state: true },
-      _climExpanded: { state: true },
     };
   }
 
@@ -20,7 +19,6 @@ class TeslaMenuClimate extends TeslaBase {
   constructor() {
     super();
     this._pendingTemp  = null;
-    this._climExpanded = false;
   }
 
   // ── Temperature ───────────────────────────────────────────────────────────
@@ -100,13 +98,6 @@ class TeslaMenuClimate extends TeslaBase {
     });
   }
 
-  // ── Close override — also reset expanded state ────────────────────────────
-
-  _close() {
-    this._climExpanded = false;
-    super._close();
-  }
-
   // ── Render ────────────────────────────────────────────────────────────────
 
   render() {
@@ -176,7 +167,7 @@ class TeslaMenuClimate extends TeslaBase {
       <div class="climate-menu${this.layout === 'landscape' ? ' landscape' : ''}" data-variant="${this.config.car_variant}">
 
         <!-- Car area: outer clips, inner sizes to image, seats overlay image -->
-        <div class="clim-car-area${this._climExpanded ? ' clim-car-collapsed' : ''}">
+        <div class="clim-car-area">
           <div class="clim-car-inner">
             <img class="clim-car-bg"
               src="${this._imgUrl(climBgFile)}"
@@ -226,14 +217,13 @@ class TeslaMenuClimate extends TeslaBase {
           </button>
         </div>
 
-        <!-- Bottom sheet — drag-handle reveals extra controls -->
-        <div class="clim-sheet${this._climExpanded ? ' expanded' : ''}">
+        <!-- Bottom sheet -->
+        <div class="clim-sheet">
 
-          <!-- Drag handle pill — tap to expand/collapse -->
-          <button class="clim-handle"
-            @click=${() => { this._climExpanded = !this._climExpanded; }}>
+          <!-- Handle pill — decoration only, like the Tesla app; everything below is always shown -->
+          <div class="clim-handle" aria-hidden="true">
             <span class="clim-handle-pill"></span>
-          </button>
+          </div>
 
           <!-- Interior · Exterior temps -->
           ${(tempIn || tempOut) ? html`
