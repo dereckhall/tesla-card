@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0] - 2026-09-30
+
+### Added
+- **White interior** — `interior: white` shows white seats on the climate screen (Model Y 2025+ Quicksilver images `climate-bg-white.png` / `climate-bg-charging-white.png`; other colors fall back to the standard image).
+- **Cabin Overheat Protection activation temperature** — 90 / 95 / 100 °F (30 / 35 / 40 °C) row under the Off / No A/C / On control.
+
+### Changed
+- **Climate screen matches the Tesla app** — Model Y 2025+ shows the whole car (charge cable included) above the controls; heater icons sit on the steering wheel and seat backs; seats show the icon only (no "off" label); whole-degree targets read `70°` not `70.0°`; Dog Mode is now **Pet Mode**.
+- Cabin Overheat Protection only appears when its entity exists (the Fleet integration ships it disabled).
+
+### Fixed
+- **Doubled steering-wheel icon** on Model Y 2025+ — the heat icon baked into the Quicksilver climate images is removed; the card's own icon is the only one.
+
 ## [1.2.0] - 2026-09-30
 
 ### Removed

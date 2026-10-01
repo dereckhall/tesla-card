@@ -116,6 +116,7 @@ class TeslaCard extends LitElement {
     if (config.car_model   && !safeIdRe.test(config.car_model))     throw new Error('car_model contains invalid characters');
     if (config.car_variant && !safeIdRe.test(config.car_variant))   throw new Error('car_variant contains invalid characters');
     if (config.car_color   && !safeIdRe.test(config.car_color))     throw new Error('car_color contains invalid characters');
+    if (config.interior    && !['black', 'white'].includes(config.interior)) throw new Error('interior must be black or white');
     this._baseConfig = {
       car_model:   '3',
       car_variant: '3.1',

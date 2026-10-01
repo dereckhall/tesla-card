@@ -78,7 +78,17 @@ class TeslaMenuClimate extends TeslaBase {
     }
   }
 
-  // ── Camp/Dog mode — Fleet uses climate presets, Custom uses switches ──────
+  // ── Cabin Overheat Protection activation temperature ───────────────────
+  // Tesla offers 30 / 35 / 40 °C; the app labels them 90 / 95 / 100 °F.
+
+  _copTempOptions() {
+    const unit = this.hass?.config?.unit_system?.temperature ?? '°C';
+    return unit === '°F'
+      ? [{ label: '90°F', value: 86 }, { label: '95°F', value: 95 }, { label: '100°F', value: 104 }]
+      : [{ label: '30°C', value: 30 }, { label: '35°C', value: 35 }, { label: '40°C', value: 40 }];
+  }
+
+  // ── Camp/Pet mode — Fleet uses climate presets, Custom uses switches ──────
 
   _togglePresetOrSwitch(presetName, isOn, switchTpl) {
     if (switchTpl) {
@@ -107,7 +117,7 @@ class TeslaMenuClimate extends TeslaBase {
     const tgtTempRaw    = this._attr(this.E.CLIMATE, 'temperature');
     const tgtTemp       = tgtTempRaw != null ? Number(tgtTempRaw) : null;
     const dispTemp      = this._pendingTemp ?? tgtTemp;
-    const tempStr       = dispTemp != null ? dispTemp.toFixed(1) : '—';
+    const tempStr       = dispTemp == null ? '—' : Number.isInteger(dispTemp) ? String(dispTemp) : dispTemp.toFixed(1);
 
     const isDefrost     = this._val(this.E.DEFROST_SWITCH) === 'on';
 
@@ -140,7 +150,7 @@ class TeslaMenuClimate extends TeslaBase {
     const dogMode       = this.E.DOG_MODE
       ? this._val(this.E.DOG_MODE) === 'on'
       : curPreset === 'dog';
-    const hasCabinOverheat = !!this.E.CABIN_OVERHEAT;
+    const hasCabinOverheat = !!this._state(this.E.CABIN_OVERHEAT);
     const cabinOverheatRaw = this._val(this.E.CABIN_OVERHEAT) ?? 'Off';
     const isCabinClimate = hasCabinOverheat && this._domainOf(this.E.CABIN_OVERHEAT) === 'climate';
     const cabinOverheat = isCabinClimate
@@ -152,17 +162,25 @@ class TeslaMenuClimate extends TeslaBase {
     const autoSteering     = this._val(this.E.AUTO_STEERING_WHEEL_HEATER) === 'on';
     const steeringLabel    = autoSteering ? 'Auto' : steeringLevel === 'off' ? 'Off' : steeringLevel === 'low' ? 'Low' : 'High';
 
+    const copTempRaw    = isCabinClimate ? this._attr(this.E.CABIN_OVERHEAT, 'temperature') : null;
+    const copTemps      = this._copTempOptions();
+    const copTemp       = copTempRaw == null ? null
+      : copTemps.reduce((a, b) => Math.abs(b.value - copTempRaw) < Math.abs(a.value - copTempRaw) ? b : a).value;
+
     const pluggedIn     = this._val(this.E.PLUGGED_IN) === 'on';
-    const climBgFile    = pluggedIn ? 'climate-bg-charging.png' : 'climate-bg.png';
+    const climBgBase    = pluggedIn ? 'climate-bg-charging.png' : 'climate-bg.png';
+    // interior: white → the *-white.png image where the colour folder has one (falls back on error)
+    const climBgFile    = this.config.interior === 'white' ? climBgBase.replace('.png', '-white.png') : climBgBase;
 
     return html`
-      <div class="climate-menu${this.layout === 'landscape' ? ' landscape' : ''}">
+      <div class="climate-menu${this.layout === 'landscape' ? ' landscape' : ''}" data-variant="${this.config.car_variant}">
 
         <!-- Car area: outer clips, inner sizes to image, seats overlay image -->
         <div class="clim-car-area${this._climExpanded ? ' clim-car-collapsed' : ''}">
           <div class="clim-car-inner">
             <img class="clim-car-bg"
               src="${this._imgUrl(climBgFile)}"
+              @error=${(e) => { if (climBgFile !== climBgBase) e.target.src = this._imgUrl(climBgBase); }}
               alt="Car interior view" />
             ${this._hasCustomOverlay ? html`
               <div style="${this._customOverlayStyleFor(climBgFile)}"></div>` : ''}
@@ -179,31 +197,26 @@ class TeslaMenuClimate extends TeslaBase {
             <button class="clim-seat-zone clim-seat-fl"
               @click=${() => this._svc('select', 'select_next', this.E.HEATED_SEAT_LEFT, { cycle: true })}>
               <img class="btn-img" src="${this._btnUrl(this._seatHeatFile(leftSeat ?? 'Off'))}" alt="" />
-              <span class="clim-seat-label">${leftSeat ?? 'Off'}</span>
             </button>
             <button class="clim-seat-zone clim-seat-fr"
               @click=${() => this._svc('select', 'select_next', this.E.HEATED_SEAT_RIGHT, { cycle: true })}>
               <img class="btn-img" src="${this._btnUrl(this._seatHeatFile(rightSeat ?? 'Off'))}" alt="" />
-              <span class="clim-seat-label">${rightSeat ?? 'Off'}</span>
             </button>
             <!-- Rear seats (only if entities exist) -->
             ${hasRearLeft ? html`
               <button class="clim-seat-zone clim-seat-rl"
                 @click=${() => this._svc('select', 'select_next', this.E.HEATED_SEAT_REAR_LEFT, { cycle: true })}>
                 <img class="btn-img" src="${this._btnUrl(this._seatHeatFile(rearLeftSeat ?? 'Off'))}" alt="" />
-                <span class="clim-seat-label">${rearLeftSeat ?? 'Off'}</span>
               </button>` : ''}
             ${hasRearCtr ? html`
               <button class="clim-seat-zone clim-seat-rc"
                 @click=${() => this._svc('select', 'select_next', this.E.HEATED_SEAT_REAR_CENTER, { cycle: true })}>
                 <img class="btn-img" src="${this._btnUrl(this._seatHeatFile(rearCtrSeat ?? 'Off'))}" alt="" />
-                <span class="clim-seat-label">${rearCtrSeat ?? 'Off'}</span>
               </button>` : ''}
             ${hasRearRight ? html`
               <button class="clim-seat-zone clim-seat-rr"
                 @click=${() => this._svc('select', 'select_next', this.E.HEATED_SEAT_REAR_RIGHT, { cycle: true })}>
                 <img class="btn-img" src="${this._btnUrl(this._seatHeatFile(rearRightSeat ?? 'Off'))}" alt="" />
-                <span class="clim-seat-label">${rearRightSeat ?? 'Off'}</span>
               </button>` : ''}
           </div>
 
@@ -269,7 +282,7 @@ class TeslaMenuClimate extends TeslaBase {
           <!-- Expanded section — Camp Mode / Dog Mode + Cabin Overheat Protection -->
           <div class="clim-expanded-content">
 
-            <!-- Camp Mode + Dog Mode -->
+            <!-- Camp Mode + Pet Mode -->
             ${hasCampMode || hasDogMode ? html`
               <div class="clim-list-group">
                 ${hasCampMode ? html`
@@ -282,7 +295,7 @@ class TeslaMenuClimate extends TeslaBase {
                   <button class="clim-list-item${dogMode ? ' hot' : ''}"
                     @click=${() => this._togglePresetOrSwitch('dog', dogMode, this.E.DOG_MODE)}>
                     <img class="clim-list-img" src="${this._btnUrl(dogMode ? 'Tesla_Climate_Dogmode_On.svg' : 'Tesla_Climate_Dogmode_Off.svg')}" alt="" />
-                    <span class="clim-list-label">Dog Mode</span>
+                    <span class="clim-list-label">Pet Mode</span>
                   </button>` : ''}
               </div>
               <div class="clim-separator"></div>
@@ -298,6 +311,15 @@ class TeslaMenuClimate extends TeslaBase {
                     ${opt}
                   </button>`)}
               </div>
+              ${copTemp != null ? html`
+                <div class="clim-section-sub">Approximate activation temperature</div>
+                <div class="clim-list-group clim-segment-group clim-list-group--last">
+                  ${copTemps.map(o => html`
+                    <button class="clim-segment-btn${copTemp === o.value ? ' selected' : ''}"
+                      @click=${() => this._svc('climate', 'set_temperature', this.E.CABIN_OVERHEAT, { temperature: o.value })}>
+                      ${o.label}
+                    </button>`)}
+                </div>` : ''}
             ` : ''}
 
           </div><!-- /clim-expanded-content -->
