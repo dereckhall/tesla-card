@@ -15,7 +15,6 @@ export class TeslaBase extends LitElement {
       config:       { type: Object },
       customColor: { type: Object },  // { h, s } | null — for custom CSS overlay
       layout:       { type: String },  // 'portrait' | 'landscape'
-      tireUnit:     { type: String },  // 'psi' | 'bar'
     };
   }
 

@@ -23,7 +23,7 @@ If you find this card useful: [![Buy Me A Coffee](https://img.shields.io/badge/B
 - **Default view** — car image with battery bar, range, parked/speed status, inside temperature
 - **Charger menu** — charging state, charge port open/close, start/stop charging, charge limit slider, charging amps slider
 - **Climate menu** — HVAC on/off, temperature stepper, defrost toggle, heated front seats (Off/Low/Med/High), heated steering wheel (Auto/Low/High), camp mode, dog mode, cabin overheat protection, window vent/close
-- **Controls menu** — door lock/unlock, frunk open, trunk open/close, charge port, remote start, horn, flash lights, window vent/close, tire pressure display (psi/bar toggle)
+- **Controls menu** — door lock/unlock, frunk open, trunk open/close, charge port, remote start, horn, flash lights, window vent/close, tire pressure display (in the sensors' unit, psi on a US install)
 - **Driving mode** — speed display, wind line animation, navigation row with destination and arrival time
 - **Charging header** — green battery bar, bolt icon, range in green, time remaining to charge limit
 - **Animated climate indicator** — spinning fan icon on landing page when HVAC is active

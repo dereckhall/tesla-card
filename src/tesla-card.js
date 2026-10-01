@@ -45,9 +45,7 @@ const LS_COLOR_PREFIX = 'tesla-card-color-';
 const LS_MODEL_PREFIX  = 'tesla-card-model-';
 const LS_LAYOUT_PREFIX    = 'tesla-card-layout-';
 const LS_SIZE_PREFIX      = 'tesla-card-size-';
-const LS_TIRE_UNIT_PREFIX = 'tesla-card-tire-unit-';
 const CARD_SIZES          = ['small', 'medium', 'large'];
-const TIRE_UNITS          = ['psi', 'bar'];
 
 /** Clamp a value to a numeric range; returns null if not a finite number. */
 function _clampNum(v, min, max) {
@@ -73,7 +71,6 @@ class TeslaCard extends LitElement {
       _layout:         { state: true },   // 'portrait' | 'landscape'
       _settingsSlide:  { state: true },   // null | 'left' | 'right' — panel transition direction
       _cardSize:       { state: true },   // 'small' | 'medium' | 'large'
-      _tireUnit:       { state: true },   // 'psi' | 'bar'
     };
   }
 
@@ -92,7 +89,6 @@ class TeslaCard extends LitElement {
     this._layout          = 'portrait';
     this._settingsSlide   = null;
     this._cardSize        = 'medium';
-    this._tireUnit        = 'psi';
     this._baseConfig      = null;
     this._combinedAvail   = {};   // { 'nf+nr': true/false, 'ff+fr': true/false, 'oc_nf+nr': ..., 'all': ..., 'oc_all': ... }
     this._onchargeAvail   = false; // whether oncharge-base.png exists for current color
@@ -199,7 +195,6 @@ class TeslaCard extends LitElement {
     }
     this._restoreLayout();
     this._restoreSize();
-    this._restoreTireUnit();
   }
 
   // ── Color ──
@@ -355,31 +350,6 @@ class TeslaCard extends LitElement {
     if (this._cardSize === size) return;
     this._cardSize = size;
     this._persistSize();
-  }
-
-  // ── Tire Unit ──
-
-  _tireUnitLsKey() {
-    return LS_TIRE_UNIT_PREFIX + (this._baseConfig?.car_name ?? 'default');
-  }
-
-  _restoreTireUnit() {
-    try {
-      const raw = localStorage.getItem(this._tireUnitLsKey());
-      if (raw && TIRE_UNITS.includes(raw)) this._tireUnit = raw;
-    } catch { /* ignore */ }
-  }
-
-  _persistTireUnit() {
-    try {
-      localStorage.setItem(this._tireUnitLsKey(), this._tireUnit);
-    } catch { /* */ }
-  }
-
-  _setTireUnit(unit) {
-    if (this._tireUnit === unit) return;
-    this._tireUnit = unit;
-    this._persistTireUnit();
   }
 
   // ─── Image URL helpers ───────────────────────────────────────────────────
@@ -890,7 +860,6 @@ class TeslaCard extends LitElement {
             .config=${this.config}
             .customColor=${this._customColor}
             .layout=${this._layout}
-            .tireUnit=${this._tireUnit}
             @close-menu=${this._handleCloseMenu}>
           </tesla-menu-controls>` : ''}
 
@@ -936,19 +905,6 @@ class TeslaCard extends LitElement {
                   </div>
                   <span class="icon settings-row-chevron">${unsafeHTML(ICONS['chevron-right'])}</span>
                 </button>
-                <div class="settings-row settings-row-static">
-                  <span class="icon settings-row-icon">${unsafeHTML(ICONS.tire)}</span>
-                  <div class="settings-row-text">
-                    <span class="settings-row-label">Tire Units</span>
-                  </div>
-                  <div class="settings-size-control">
-                    ${TIRE_UNITS.map(u => html`
-                      <button class="settings-size-btn${this._tireUnit === u ? ' selected' : ''}"
-                        @click=${(e) => { e.stopPropagation(); this._setTireUnit(u); }}>
-                        ${u}
-                      </button>`)}
-                  </div>
-                </div>
               </div>
             </div>
           </div>

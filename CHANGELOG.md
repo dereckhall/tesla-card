@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.0] - 2026-09-30
+
+### Removed
+- **psi/bar tire unit toggle** — the Settings row, its saved preference and the psi↔bar conversion are gone. Tire pressures show in the sensors' own unit (psi on a US install). The unused `tire` settings icon went with it.
+
 ## [1.1.1] - 2026-09-30
 
 ### Fixed

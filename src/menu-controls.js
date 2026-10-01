@@ -21,13 +21,9 @@ class TeslaMenuControls extends TeslaBase {
     this._showTires = false;
   }
 
-  _formatPressure(val, sourceUnit, displayUnit) {
+  _formatPressure(val) {
     if (val == null || val === 'unknown' || val === 'unavailable') return '—';
-    let n = Number(val);
-    // Convert if source and display units differ
-    if (sourceUnit === 'psi' && displayUnit === 'bar') n = n * 0.0689476;
-    else if (sourceUnit === 'bar' && displayUnit === 'psi') n = n / 0.0689476;
-    return n.toFixed(1);
+    return Number(val).toFixed(1);
   }
 
   render() {
@@ -48,12 +44,12 @@ class TeslaMenuControls extends TeslaBase {
 
     // Tire pressure — only show toggle if entities exist
     const hasTires   = !!this._state(this.E.TIRE_FL);
-    const sourceUnit = this._attr(this.E.TIRE_FL, 'unit_of_measurement') ?? 'psi';
-    const dispUnit   = this.tireUnit ?? 'psi';
-    const tireFL = this._formatPressure(this._val(this.E.TIRE_FL), sourceUnit, dispUnit);
-    const tireFR = this._formatPressure(this._val(this.E.TIRE_FR), sourceUnit, dispUnit);
-    const tireRL = this._formatPressure(this._val(this.E.TIRE_RL), sourceUnit, dispUnit);
-    const tireRR = this._formatPressure(this._val(this.E.TIRE_RR), sourceUnit, dispUnit);
+    // shown in the sensors' own unit (psi on a US install)
+    const dispUnit   = this._attr(this.E.TIRE_FL, 'unit_of_measurement') ?? 'psi';
+    const tireFL = this._formatPressure(this._val(this.E.TIRE_FL));
+    const tireFR = this._formatPressure(this._val(this.E.TIRE_FR));
+    const tireRL = this._formatPressure(this._val(this.E.TIRE_RL));
+    const tireRR = this._formatPressure(this._val(this.E.TIRE_RR));
 
     return html`
       <div class="controls-menu${this.layout === 'landscape' ? ' landscape' : ''}">
