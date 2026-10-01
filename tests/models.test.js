@@ -23,7 +23,7 @@ describe('TESLA_MODELS', () => {
     }
   });
 
-  it('each variant has id, label, and colours array', () => {
+  it('each variant has id, label, and colors array', () => {
     for (const model of TESLA_MODELS) {
       for (const variant of model.variants) {
         expect(variant).toHaveProperty('id');
@@ -34,7 +34,7 @@ describe('TESLA_MODELS', () => {
     }
   });
 
-  it('every variant colours array includes "neutral"', () => {
+  it('every variant colors array includes "neutral"', () => {
     for (const model of TESLA_MODELS) {
       for (const variant of model.variants) {
         expect(variant.colours).toContain('neutral');
@@ -57,13 +57,13 @@ describe('TESLA_MODELS', () => {
 // ── getVariantColours() ─────────────────────────────────────────────────────
 
 describe('getVariantColours', () => {
-  it('returns colours for a known model+variant', () => {
+  it('returns colors for a known model+variant', () => {
     const colours = getVariantColours('3', '3.1');
     expect(Array.isArray(colours)).toBe(true);
     expect(colours).toContain('neutral');
   });
 
-  it('includes non-neutral colours with images for Model 3 3.1', () => {
+  it('includes non-neutral colors with images for Model 3 3.1', () => {
     const colours = getVariantColours('3', '3.1');
     expect(colours.length).toBeGreaterThan(1);
     expect(colours).toContain('red_multi_coat');

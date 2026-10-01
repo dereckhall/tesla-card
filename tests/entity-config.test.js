@@ -156,7 +156,7 @@ describe('ENTITY_GROUPS', () => {
     expect(labels).toContain('Climate');
     expect(labels).toContain('Charging');
     expect(labels).toContain('Lock');
-    expect(labels).toContain('Tyre Pressure');
+    expect(labels).toContain('Tire Pressure');
   });
 });
 

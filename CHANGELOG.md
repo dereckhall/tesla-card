@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.8] - 2026-09-30
+
+### Changed
+- **US English** — on-card labels now read *Color*, *Model & Color*, *Tire Units* and *Tire Pressure* (editor); docs, comments and test names use US spelling. Config keys (`TYRE_FL` etc.), saved settings and Tesla paint names (Stealth Grey, Midnight Grey) are unchanged.
+
 ## [1.0.7] - 2026-09-30
 
 ### Changed
@@ -9,21 +14,21 @@
 
 ### Added
 - **Model Y 2020–2024 — Deep Blue Metallic** images (contributed by [@ccarcione](https://github.com/ccarcione))
-- **Automated test suite** — Vitest framework with 78 tests covering entity config, models, colours, and security validation. Run with `npm test`.
+- **Automated test suite** — Vitest framework with 78 tests covering entity config, models, colors, and security validation. Run with `npm test`.
 
 ### Security
 - **Config value validation** — `setConfig()` now rejects `image_path`, `car_model`, `car_variant`, and `car_color` values containing characters that could escape CSS or URL contexts (prevents CSS injection via crafted card config).
-- **Custom colour clamping** — `h` (0–360) and `s` (0–100) values are validated as finite numbers and clamped before interpolation into inline CSS styles. Blocks injection via malicious localStorage writes.
+- **Custom color clamping** — `h` (0–360) and `s` (0–100) values are validated as finite numbers and clamped before interpolation into inline CSS styles. Blocks injection via malicious localStorage writes.
 - **localStorage shape validation** — `_restoreColour()` and `_restoreModel()` now verify the deserialized JSON matches the expected object shape (`{ dir }` / `{ model, variant }`) before assigning to component state.
 
 ## [1.0.0] - 2026-03-17
 
 ### Added
 - **Heated steering wheel** on climate screen — cycles through Off/Low/High with Tesla app SVGs, shows "Auto" when auto steering heater switch is on. Only appears if the entity exists.
-- **Tyre pressure display** in Controls menu — toggle button (top-right) shows pressure at all 4 corners. Uses Tesla TPMS SVG icon.
-- **Tyre unit toggle** (psi/bar) in Settings panel — auto-converts pressure values, persisted per car.
-- **Camp/dog mode Tesla SVGs** — replaced inline icons with official Tesla app button images (grey off, white on).
-- **Steering wheel heater SVGs** — Off (grey), Low (1 red wave), High (2 red waves), transparent backgrounds.
+- **Tire pressure display** in Controls menu — toggle button (top-right) shows pressure at all 4 corners. Uses Tesla TPMS SVG icon.
+- **Tire unit toggle** (psi/bar) in Settings panel — auto-converts pressure values, persisted per car.
+- **Camp/dog mode Tesla SVGs** — replaced inline icons with official Tesla app button images (gray off, white on).
+- **Steering wheel heater SVGs** — Off (gray), Low (1 red wave), High (2 red waves), transparent backgrounds.
 
 ### Fixed
 - Steering wheel SVGs cleaned — "AUTO" text paths removed, transparent backgrounds.
@@ -32,7 +37,7 @@
 ## [0.6.5] - 2026-03-17
 
 ### Added
-- **Tyre pressure display** — toggle button in Controls menu header shows pressure values at all 4 corners of the car image, with unit display (psi/bar). Only appears if tyre pressure entities exist.
+- **Tire pressure display** — toggle button in Controls menu header shows pressure values at all 4 corners of the car image, with unit display (psi/bar). Only appears if tire pressure entities exist.
 - **Driving mode** — speed shown in header when car is moving, animated wind lines behind the car at correct 3/4 perspective angle
 - **Navigation row** — appears when driving with active route, shows destination, distance away, and arrival time
 - **Location row** — shows zone name from device_tracker (Home, Not home, etc.), switches to navigation info when driving
@@ -52,7 +57,7 @@
 
 ### Changed
 - Removed Set Schedules and Security & Drivers nav rows (no Fleet API support)
-- Active nav row chevron stays default colour and direction
+- Active nav row chevron stays default color and direction
 - Increased nav row spacing between label and sublabel
 
 ## [0.5.0] - 2026-03-16
@@ -77,8 +82,8 @@
 
 ### Changed
 - Removed Location, Set Schedules, and Security & Drivers nav rows — these features are not available through the Fleet API.
-- Active nav row chevron no longer rotates or changes colour — stays pointing right with default styling.
-- Active nav row sublabel colour changed from red to white.
+- Active nav row chevron no longer rotates or changes color — stays pointing right with default styling.
+- Active nav row sublabel color changed from red to white.
 - Lint cleanup: removed unused variables, added test/ to .gitignore.
 - Security audit: 0 hardcoded secrets, 0 eval/injection vectors, 0 external runtime URLs, 0 npm vulnerabilities.
 
@@ -109,7 +114,7 @@
 ## [0.3.4] - 2026-03-09
 
 ### Added
-- **Stealth Grey** colour added to Model 3 Highland (3.2), Model Y 2020–2024 (Y.1), Model Y Juniper (Y.2), Model S Refresh (S.2), and Model X Refresh (X.2)
+- **Stealth Grey** color added to Model 3 Highland (3.2), Model Y 2020–2024 (Y.1), Model Y Juniper (Y.2), Model S Refresh (S.2), and Model X Refresh (X.2)
 
 ## [0.3.0] - 2026-03-03
 
@@ -121,12 +126,12 @@
 - **Charging cable glow animation** — extracted cable overlay pulses with a green `drop-shadow` + `brightness` animation when actively charging
 - **Cable overlay extraction** — `oncharge-cable-overlay.png` is auto-generated by the processing pipeline and rendered as a separate layer for the glow effect
 - **Combined door overlays** — `nf-nr-combined` and `ff-fr-combined` overlays for when both same-side doors are open, eliminating overlap artifacts
-- **On-charge availability probing** — card probes for `oncharge-base.png` at load and enables/disables the oncharge image set per colour
+- **On-charge availability probing** — card probes for `oncharge-base.png` at load and enables/disables the oncharge image set per color
 - **models.json as single source of truth** — all model/variant/colour definitions and `hasImages` flags driven from one file
 - **HACS image delivery** — processed images ship in `dist/` for automatic HACS installation
 
 ### Changed
-- **Image folder structure** — colours use `models.json` IDs (e.g. `red_multi_coat` instead of `red`); Model S/Y paths use uppercase IDs (`S/S.1`, `Y/Y.1`)
+- **Image folder structure** — colors use `models.json` IDs (e.g. `red_multi_coat` instead of `red`); Model S/Y paths use uppercase IDs (`S/S.1`, `Y/Y.1`)
 - **Charging cable glow intensified** — dual stacked `drop-shadow` (14px/0.9 + 28px/0.4) with `brightness(1.5)` pulse for a much more visible effect
 - **Test states page** — added offcharge/oncharge toggle, cable overlay rendering, and mode-dependent file lists
 
@@ -143,7 +148,7 @@
   - Landing page: car image + quick actions on left, nav rows on right
   - Climate panel: car + seat controls on left, temperature/defrost/camp/dog controls on right
   - Controls panel: car tap zones on left, action buttons stacked vertically on right
-- **Model & Colour flow** — selecting a model now automatically forwards to the colour picker with smooth directional slide transitions (right for forward, left for back)
+- **Model & Color flow** — selecting a model now automatically forwards to the color picker with smooth directional slide transitions (right for forward, left for back)
 - **Staggered panel transitions** — header, car image, quick actions, and nav rows fade-slide in sequentially on load; submenus slide up on entry
 - **New icons** — inline SVG icons for car (top-down Tesla silhouette), climate fan (Tesla 4-blade pinwheel), layout toggle, schedule, security, location, and more
 - **New nav rows** — Location, Set Schedules, Security & Drivers rows on the landing page
@@ -152,22 +157,22 @@
 ### Changed
 - **All buttons converted to inline SVGs** — lock, car, charging, climate quick-action buttons and nav rows now use `<span class="icon">` with inline SVG instead of `<img>` tiles
 - **Unified hover effects** — all interactive elements (icon buttons, quick actions, nav rows) share consistent 0.8 alpha brightening + drop-shadow glow on hover
-- **Settings menu simplified** — Model and Colour merged into a single "Model & Colour" row; selecting a model flows directly into colour selection
+- **Settings menu simplified** — Model and Color merged into a single "Model & Color" row; selecting a model flows directly into color selection
 - **"Offline" renamed to "Asleep"** — status text matches Tesla app language
-- **"Midnight Silver" renamed to "Midnight Grey"** — factory colour name corrected
+- **"Midnight Silver" renamed to "Midnight Grey"** — factory color name corrected
 - **Seat control icons reduced 20%** — climate seat heat buttons scaled from 36px to 29px
 - **Layout property added to TeslaBase** — all submenu components receive the layout state from the parent card
 - **Controls overlay positions refined** — frunk (14%), trunk (78%), charge port (82%/20%)
 
 ### Removed
-- Standalone Colour settings row (merged into Model & Colour flow)
+- Standalone Color settings row (merged into Model & Color flow)
 - Unused `settings-swatch` CSS class
 - Legacy `<img>` button tiles for quick actions and nav rows
 - Scroll constraints on model picker (`max-height`, `overflow-y: auto`)
 - Old/unused images: legacy gray Model 3, old neutral Model 3 previews, Model S white raw screenshots
 
 ### Fixed
-- Model Y images normalised to match Model 3 red reference proportions (87% width fill, consistent car sizing across base/chargeport/frunk variants)
+- Model Y images normalized to match Model 3 red reference proportions (87% width fill, consistent car sizing across base/chargeport/frunk variants)
 - Model Y controls and climate background images rescaled to match Model 3 dimensions
-- Disabled nav rows styled to appear normal (not greyed out) matching Tesla app
+- Disabled nav rows styled to appear normal (not grayed out) matching Tesla app
 - Template syntax fixes for landscape class attributes on submenu components

@@ -219,9 +219,9 @@ homeassistant-fe-tesla/
 
 Match the Tesla mobile app aesthetic precisely:
 
-- **Dark theme**: Near-black backgrounds (`#1a1a1a` / `#0d0d0d`), never white or grey
+- **Dark theme**: Near-black backgrounds (`#1a1a1a` / `#0d0d0d`), never white or gray
 - **Typography**: `'Gotham', 'Gill Sans', 'Century Gothic', system-ui` — geometric sans, no external font CDN
-- **Accent colour**: Tesla red `#e82127` for active states, highlights, and charging indicators
+- **Accent color**: Tesla red `#e82127` for active states, highlights, and charging indicators
 - **Buttons**: Pill-shaped, subtle borders, icon + label, highlight on active state
 - **Motion**: Smooth menu slide transitions (200ms ease-in-out), charging bolt pulse animation, no bouncy/springy effects
 - **Spacing**: Generous padding — feels like a phone app, not a cramped dashboard widget
@@ -247,7 +247,7 @@ Icons are sourced from **[Tabler Icons](https://tabler.io/icons)** (MIT licensed
 ### Rules
 - All icons defined as SVG strings in `src/icons.js` as named exports
 - `viewBox="0 0 24 24"` standard size (Tabler uses this already)
-- `stroke="currentColor"` so CSS controls colour
+- `stroke="currentColor"` so CSS controls color
 - `stroke-width="1.5"`, `stroke-linecap="round"`, `stroke-linejoin="round"`
 - `fill="none"` on the SVG element
 

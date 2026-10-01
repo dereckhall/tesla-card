@@ -1,4 +1,4 @@
-// Factory Tesla colours for the colour picker — derived from models.json.
+// Factory Tesla colors for the color picker — derived from models.json.
 // `dir` maps to the image directory name under {model}/{variant}/.
 
 import modelsData from '../models.json';

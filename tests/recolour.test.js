@@ -7,7 +7,7 @@ describe('FACTORY_COLOURS', () => {
     expect(FACTORY_COLOURS.length).toBeGreaterThan(0);
   });
 
-  it('each colour has name, dir, and swatch', () => {
+  it('each color has name, dir, and swatch', () => {
     for (const colour of FACTORY_COLOURS) {
       expect(colour).toHaveProperty('name');
       expect(colour).toHaveProperty('dir');
@@ -18,7 +18,7 @@ describe('FACTORY_COLOURS', () => {
     }
   });
 
-  it('swatch values look like hex colours', () => {
+  it('swatch values look like hex colors', () => {
     for (const colour of FACTORY_COLOURS) {
       expect(colour.swatch).toMatch(/^#[0-9a-fA-F]{6}$/);
     }

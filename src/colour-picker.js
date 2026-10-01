@@ -7,7 +7,7 @@ class TeslaColourPicker extends LitElement {
 
   static get properties() {
     return {
-      selected:    { type: String },     // current colour dir name e.g. 'red_multi_coat' or 'custom'
+      selected:    { type: String },     // current color dir name e.g. 'red_multi_coat' or 'custom'
       available:   { type: Array },      // dirs that have images e.g. ['neutral','red_multi_coat']
       showBack:    { type: Boolean },
       customH:     { type: Number },     // current custom hue (0-360)
@@ -400,7 +400,7 @@ class TeslaColourPicker extends LitElement {
               <button class="picker-back" @click=${this._back}>
                 <span class="icon">${unsafeHTML(ICONS['chevron-left'])}</span>
               </button>` : ''}
-            <span class="picker-title">Colour</span>
+            <span class="picker-title">Color</span>
             <button class="picker-close" @click=${this._close}>&times;</button>
           </div>
 

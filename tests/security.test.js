@@ -105,7 +105,7 @@ describe('config value validation', () => {
       expect(safeIdRe.test('3.1')).toBe(true);
     });
 
-    it('accepts colour with underscores and hyphens', () => {
+    it('accepts color with underscores and hyphens', () => {
       expect(safeIdRe.test('red_multi_coat')).toBe(true);
       expect(safeIdRe.test('deep-blue')).toBe(true);
     });
@@ -127,13 +127,13 @@ describe('config value validation', () => {
 // ── localStorage shape validation patterns ──────────────────────────────────
 
 describe('localStorage shape validation', () => {
-  it('valid colour override shape is accepted', () => {
+  it('valid color override shape is accepted', () => {
     const parsed = JSON.parse('{"dir":"red_multi_coat"}');
     const valid = parsed && typeof parsed.dir === 'string';
     expect(valid).toBe(true);
   });
 
-  it('valid custom colour shape is accepted', () => {
+  it('valid custom color shape is accepted', () => {
     const parsed = JSON.parse('{"dir":"custom","h":180,"s":80}');
     const valid = parsed && typeof parsed.dir === 'string';
     const h = _clampNum(parsed.h, 0, 360);
@@ -143,19 +143,19 @@ describe('localStorage shape validation', () => {
     expect(s).toBe(80);
   });
 
-  it('rejects colour override without dir string', () => {
+  it('rejects color override without dir string', () => {
     const parsed = JSON.parse('{"dir":123}');
     const valid = parsed && typeof parsed.dir === 'string';
     expect(valid).toBe(false);
   });
 
-  it('rejects colour override that is an array', () => {
+  it('rejects color override that is an array', () => {
     const parsed = JSON.parse('[1,2,3]');
     const valid = parsed && typeof parsed.dir === 'string';
     expect(valid).toBe(false);
   });
 
-  it('rejects custom colour with injection in h', () => {
+  it('rejects custom color with injection in h', () => {
     const parsed = JSON.parse('{"dir":"custom","h":"0); evil","s":80}');
     const h = _clampNum(parsed.h, 0, 360);
     expect(h).toBeNull();

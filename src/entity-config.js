@@ -87,7 +87,7 @@ const FLEET = {
   // Sensors — charging session
   ENERGY_ADDED:         'sensor.{car_name}_charge_energy_added',
 
-  // Tyre pressure
+  // Tire pressure
   TYRE_FL:              'sensor.{car_name}_tyre_pressure_front_left',
   TYRE_FR:              'sensor.{car_name}_tyre_pressure_front_right',
   TYRE_RL:              'sensor.{car_name}_tyre_pressure_rear_left',
@@ -189,7 +189,7 @@ const CUSTOM = {
   // Sensors — charging session
   ENERGY_ADDED:         'sensor.{car_name}_energy_added',
 
-  // Tyre pressure
+  // Tire pressure
   TYRE_FL: 'sensor.{car_name}_tpms_front_left',
   TYRE_FR: 'sensor.{car_name}_tpms_front_right',
   TYRE_RL: 'sensor.{car_name}_tpms_rear_left',
@@ -272,7 +272,7 @@ export const ENTITY_GROUPS = [
     { key: 'REMOTE_START',  label: 'Remote Start', domain: 'button' },
     { key: 'FORCE_UPDATE',  label: 'Wake / Refresh', domain: 'button' },
   ]},
-  { label: 'Tyre Pressure', keys: [
+  { label: 'Tire Pressure', keys: [
     { key: 'TYRE_FL', label: 'Front Left',  domain: 'sensor' },
     { key: 'TYRE_FR', label: 'Front Right', domain: 'sensor' },
     { key: 'TYRE_RL', label: 'Rear Left',   domain: 'sensor' },

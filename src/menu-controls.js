@@ -46,7 +46,7 @@ class TeslaMenuControls extends TeslaBase {
     const windowsOpen   = this._val(this.E.WINDOWS_COVER) === 'open';
     const bgFile = pluggedIn ? 'controls-bg-charging.png' : 'controls-bg.png';
 
-    // Tyre pressure — only show toggle if entities exist
+    // Tire pressure — only show toggle if entities exist
     const hasTyres   = !!this._state(this.E.TYRE_FL);
     const sourceUnit = this._attr(this.E.TYRE_FL, 'unit_of_measurement') ?? 'psi';
     const dispUnit   = this.tyreUnit ?? 'psi';
@@ -76,7 +76,7 @@ class TeslaMenuControls extends TeslaBase {
             <div style="${this._customOverlayStyleFor(bgFile)}"></div>` : ''}
 
           ${this._showTyres ? html`
-            <!-- Tyre pressure overlays -->
+            <!-- Tire pressure overlays -->
             <div class="tyre-label tyre-fl">
               <span class="tyre-value">${tyreFL}</span>
               <span class="tyre-unit">${dispUnit}</span>
@@ -94,18 +94,18 @@ class TeslaMenuControls extends TeslaBase {
               <span class="tyre-unit">${dispUnit}</span>
             </div>
           ` : html`
-            <!-- Frunk — text only, top centre (open only, must be closed physically) -->
+            <!-- Frunk — text only, top center (open only, must be closed physically) -->
             <button class="ctrl-zone ctrl-frunk"
               @click=${() => this._activate(this.E.FRUNK_COVER)}
               ?disabled=${frunkOpen}>
               ${frunkOpen ? 'Open' : 'Open'}
             </button>
-            <!-- Lock — icon only, car centre -->
+            <!-- Lock — icon only, car center -->
             <button class="ctrl-zone ctrl-lock"
               @click=${() => this._svc('lock', isLocked ? 'unlock' : 'lock', this.E.DOOR_LOCK)}>
               <span class="icon">${unsafeHTML(isLocked ? ICONS.lock : ICONS.unlock)}</span>
             </button>
-            <!-- Trunk — text only, bottom centre -->
+            <!-- Trunk — text only, bottom center -->
             <button class="ctrl-zone ctrl-trunk"
               @click=${() => this._activate(this.E.OPEN_TRUNK)}>
               ${trunkOpen ? 'Close' : 'Open'}

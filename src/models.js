@@ -1,6 +1,6 @@
 // Tesla model definitions — derived from models.json (single source of truth).
 // `colours`: array of image directory names available for this variant (picker shows these).
-// `factoryColours`: full catalogue from models.json (used by uploader and colour picker).
+// `factoryColours`: full catalog from models.json (used by uploader and color picker).
 
 import modelsData from '../models.json';
 
@@ -16,7 +16,7 @@ export const TESLA_MODELS = modelsData.models.map(m => ({
 }));
 
 /**
- * Get the list of available colour directories for a model + variant.
+ * Get the list of available color directories for a model + variant.
  */
 export function getVariantColours(modelId, variantId) {
   const model = TESLA_MODELS.find(m => m.id === modelId);

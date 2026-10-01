@@ -54,7 +54,7 @@ export const sharedStyles = css`
     animation: panelSlideUp 0.25s ease-out both;
   }
 
-  /* ── Panel header (back chevron + centred title) ──────────── */
+  /* ── Panel header (back chevron + centered title) ──────────── */
 
   .panel-header {
     display: flex;
@@ -879,7 +879,7 @@ export const controlsStyles = css`
 
   .ctrl-port.port-open { color: rgba(255,255,255,0.75); }
 
-  /* ── Panel header button (tyre toggle) ─────────────────── */
+  /* ── Panel header button (tire toggle) ─────────────────── */
 
   .panel-header-btn {
     position: absolute;
@@ -900,7 +900,7 @@ export const controlsStyles = css`
   .panel-header-btn:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.4); }
   .panel-header-btn.active { color: #f5c542; border-color: #f5c542; }
 
-  /* ── Tyre pressure labels ──────────────────────────────── */
+  /* ── Tire pressure labels ──────────────────────────────── */
 
   .tyre-label {
     position: absolute;
@@ -982,7 +982,7 @@ export const controlsStyles = css`
     min-height: 340px;
   }
 
-  /* Action bar: right column, vertically centred */
+  /* Action bar: right column, vertically centered */
   .landscape .ctrl-actions {
     flex: 1;
     flex-direction: column;

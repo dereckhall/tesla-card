@@ -95,7 +95,7 @@ class TeslaCard extends LitElement {
     this._tyreUnit        = 'psi';
     this._baseConfig      = null;
     this._combinedAvail   = {};   // { 'nf+nr': true/false, 'ff+fr': true/false, 'oc_nf+nr': ..., 'all': ..., 'oc_all': ... }
-    this._onchargeAvail   = false; // whether oncharge-base.png exists for current colour
+    this._onchargeAvail   = false; // whether oncharge-base.png exists for current color
     this._cableAvail      = false; // whether oncharge-cable-overlay.png exists
     // Pre-bound so Lit reuses the same function reference across renders
     this._toggleCharger       = () => this._toggle('charger');
@@ -202,7 +202,7 @@ class TeslaCard extends LitElement {
     this._restoreTyreUnit();
   }
 
-  // ── Colour ──
+  // ── Color ──
 
   _colourLsKey() {
     return LS_COLOUR_PREFIX + (this._baseConfig?.car_name ?? 'default');
@@ -291,7 +291,7 @@ class TeslaCard extends LitElement {
   _onModelChanged(e) {
     const { model, variant } = e.detail;
     this._modelOverride = { model, variant };
-    // Reset colour if current colour isn't available for the new model/variant
+    // Reset color if current color isn't available for the new model/variant
     const co = this._colourOverride;
     if (co && co.dir !== 'custom') {
       const availColours = getVariantColours(model, variant);
@@ -303,7 +303,7 @@ class TeslaCard extends LitElement {
     this._applyConfig();
     this._persistModel();
     this._imageError = false;
-    // Forward to colour picker
+    // Forward to color picker
     this._settingsSlide = 'right';
     this._settingsView = 'colour';
   }
@@ -357,7 +357,7 @@ class TeslaCard extends LitElement {
     this._persistSize();
   }
 
-  // ── Tyre Unit ──
+  // ── Tire Unit ──
 
   _tyreUnitLsKey() {
     return LS_TYRE_UNIT_PREFIX + (this._baseConfig?.car_name ?? 'default');
@@ -398,9 +398,9 @@ class TeslaCard extends LitElement {
     return `${this.config.image_path}/buttons/${f}?v=${TeslaCard._imgVer}`;
   }
 
-  // ─── Custom colour helpers ───────────────────────────────────────────────
+  // ─── Custom color helpers ───────────────────────────────────────────────
 
-  /** Returns { h, s } for custom colour, or null */
+  /** Returns { h, s } for custom color, or null */
   get _customColour() {
     const co = this._colourOverride;
     if (!co || co.dir !== 'custom') return null;
@@ -727,7 +727,7 @@ class TeslaCard extends LitElement {
     const curColourObj = isCustom ? null : FACTORY_COLOURS.find(c => c.dir === this.config.car_color);
     const colourSub    = isCustom ? 'Custom' : (curColourObj?.name ?? this.config.car_color);
 
-    // Available colours for current model/variant
+    // Available colors for current model/variant
     const availColours = getVariantColours(this.config.car_model, this.config.car_variant);
     const isLandscape = this._layout === 'landscape';
     const sizeClass   = this._cardSize !== 'medium' ? `size-${this._cardSize}` : '';
@@ -914,7 +914,7 @@ class TeslaCard extends LitElement {
                   @click=${() => this._openModelPicker()}>
                   <span class="icon settings-row-icon">${unsafeHTML(ICONS.car)}</span>
                   <div class="settings-row-text">
-                    <span class="settings-row-label">Model & Colour</span>
+                    <span class="settings-row-label">Model & Color</span>
                     <span class="settings-row-sub">${modelSub} · ${colourSub}</span>
                   </div>
                   <span class="icon settings-row-chevron">${unsafeHTML(ICONS['chevron-right'])}</span>
@@ -944,7 +944,7 @@ class TeslaCard extends LitElement {
                 <div class="settings-row settings-row-static">
                   <span class="icon settings-row-icon">${unsafeHTML(ICONS.tyre)}</span>
                   <div class="settings-row-text">
-                    <span class="settings-row-label">Tyre Units</span>
+                    <span class="settings-row-label">Tire Units</span>
                   </div>
                   <div class="settings-size-control">
                     ${TYRE_UNITS.map(u => html`
@@ -970,7 +970,7 @@ class TeslaCard extends LitElement {
             @picker-close=${this._handlePickerClose}>
           </tesla-model-picker>` : ''}
 
-        <!-- ── Settings: colour picker ─────────────────────── -->
+        <!-- ── Settings: color picker ─────────────────────── -->
         ${this._settingsView === 'colour' ? html`
           <tesla-colour-picker
             .selected=${co?.dir ?? this.config.car_color}

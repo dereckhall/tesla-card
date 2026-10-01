@@ -23,14 +23,14 @@ If you find this card useful: [![Buy Me A Coffee](https://img.shields.io/badge/B
 - **Default view** — car image with battery bar, range, parked/speed status, inside temperature
 - **Charger menu** — charging state, charge port open/close, start/stop charging, charge limit slider, charging amps slider
 - **Climate menu** — HVAC on/off, temperature stepper, defrost toggle, heated front seats (Off/Low/Med/High), heated steering wheel (Auto/Low/High), camp mode, dog mode, cabin overheat protection, window vent/close
-- **Controls menu** — door lock/unlock, frunk open, trunk open/close, charge port, remote start, horn, flash lights, window vent/close, tyre pressure display (psi/bar toggle)
+- **Controls menu** — door lock/unlock, frunk open, trunk open/close, charge port, remote start, horn, flash lights, window vent/close, tire pressure display (psi/bar toggle)
 - **Driving mode** — speed display, wind line animation, navigation row with destination and arrival time
 - **Charging header** — green battery bar, bolt icon, range in green, time remaining to charge limit
 - **Animated climate indicator** — spinning fan icon on landing page when HVAC is active
 - **Custom entity mapping** — use any HA entities (MQTT, third-party integrations) via the built-in entity picker
 - **Landscape layout** — optional wide layout with side-by-side panels
 - **Smart refresh** — wake button wakes the car and forces HA to re-poll all entities
-- **Multiple models & colours** — Model 3, Y, S, X with community-contributed colour variants
+- **Multiple models & colors** — Model 3, Y, S, X with community-contributed color variants
 
 **No helper entities required.** Menu state is managed entirely inside the card.
 
@@ -39,7 +39,7 @@ If you find this card useful: [![Buy Me A Coffee](https://img.shields.io/badge/B
 ### Roadmap
 
 - Wheel spin animation when driving
-- More factory colours for all models
+- More factory colors for all models
 - Additional car models and variants
 
 Help us grow the image library — submit your car's screenshots via the [Image Uploader](https://ds2000.github.io/homeassistant-fe-tesla-image-uploader) (beta).
@@ -94,7 +94,7 @@ car_name: my_tesla
 | `integration` | No | `fleet` | `fleet` — Official Tesla Fleet integration · `custom` — alandtse/tesla integration · `entities` — Manual entity mapping |
 | `entity_overrides` | No | -- | Map of entity keys to custom entity IDs (used with `integration: entities`) |
 | `car_model` | No | `3` | Model number: `3`, `Y`, `S`, or `X` |
-| `car_color` | No | `red_multi_coat` | Colour ID matching the image folder name |
+| `car_color` | No | `red_multi_coat` | Color ID matching the image folder name |
 | `image_path` | No | `/hacsfiles/tesla-card` | Base path where car images are stored |
 | `name` | No | _(car_name)_ | Display name shown at the top of the card |
 | `show_speed` | No | `true` | Show the Parked / speed status column |

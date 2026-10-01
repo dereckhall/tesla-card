@@ -59,7 +59,7 @@ export class TeslaBase extends LitElement {
     return `${image_path}/${car_model}/${car_variant}/neutral/${maskFile}?v=${TeslaBase._imgVer}`;
   }
 
-  // ── Custom colour overlay style ───────────────────────────────────────────
+  // ── Custom color overlay style ───────────────────────────────────────────
 
   get _hasCustomOverlay() {
     return !!this.customColour && this.customColour.s > 0;
