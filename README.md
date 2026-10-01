@@ -215,7 +215,7 @@ Not all entities need to exist — the card silently skips any that are unavaila
 
 All contributions are welcome:
 
-- **New car images** — submit via the [Image Uploader](https://ds2000.github.io/homeassistant-fe-tesla-image-uploader) (beta), or manually add a folder under `images/models/{model}/{variant}/{colour}/`
+- **New car images** — submit via the [Image Uploader](https://ds2000.github.io/homeassistant-fe-tesla-image-uploader) (beta), or manually add a folder under `images/models/{model}/{variant}/{color}/`
 - **Bug reports** -- open an issue with your HA version, integration version, and what you expected vs what happened
 - **Pull requests** -- please follow the one-feature-at-a-time rule and test against a live HA instance before submitting
 
