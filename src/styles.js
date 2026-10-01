@@ -567,14 +567,10 @@ export const climateStyles = css`
   }
 
   /* ── Expandable section ──────────────────────────────────── */
+  /* Always shown, like scrolling down in the Tesla app; the handle only
+     shrinks the car image to bring these up */
   .clim-expanded-content {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.35s ease;
-  }
-
-  .clim-sheet.expanded .clim-expanded-content {
-    max-height: 520px;
+    overflow: visible;
   }
 
   /* List group */

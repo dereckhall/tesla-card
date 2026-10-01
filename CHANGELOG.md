@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.1] - 2026-09-30
+
+### Changed
+- **Camp Mode, Pet Mode and Cabin Overheat Protection are always shown** under Defrost Car, like scrolling down in the Tesla app. They used to stay hidden until the handle was tapped; the handle now only shrinks the car image.
+
 ## [1.3.0] - 2026-09-30
 
 ### Added
