@@ -902,7 +902,7 @@ export const controlsStyles = css`
 
   /* ── Tire pressure labels ──────────────────────────────── */
 
-  .tyre-label {
+  .tire-label {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -911,21 +911,21 @@ export const controlsStyles = css`
     animation: fadeSlideIn 0.2s ease-out both;
   }
 
-  .tyre-value {
+  .tire-value {
     font-size: 0.95em;
     font-weight: 600;
     color: #ffffff;
   }
 
-  .tyre-unit {
+  .tire-unit {
     font-size: 0.65em;
     color: rgba(255,255,255,0.4);
   }
 
-  .tyre-fl { top: 18%; left: 6%; }
-  .tyre-fr { top: 18%; right: 6%; }
-  .tyre-rl { bottom: 18%; left: 6%; }
-  .tyre-rr { bottom: 18%; right: 6%; }
+  .tire-fl { top: 18%; left: 6%; }
+  .tire-fr { top: 18%; right: 6%; }
+  .tire-rl { bottom: 18%; left: 6%; }
+  .tire-rr { bottom: 18%; right: 6%; }
 
   /* Controls: bottom action bar */
   .ctrl-actions {

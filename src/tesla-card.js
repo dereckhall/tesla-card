@@ -796,7 +796,7 @@ class TeslaCard extends LitElement {
                       alt="" />` : ''}
                 `}
                 ${this._hasCustomOverlay ? html`
-                  <div class="car-colour-overlay"
+                  <div class="car-color-overlay"
                     style="${this._customOverlayStyleFor(baseImg)}"></div>` : ''}
                 ${isDriving ? html`
                   <div class="driving-lines">

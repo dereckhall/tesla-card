@@ -888,7 +888,7 @@ var ds=Object.defineProperty;var ps=(r,t,e)=>t in r?ds(r,t,{enumerable:!0,config
 
   /* ── Tire pressure labels ──────────────────────────────── */
 
-  .tyre-label {
+  .tire-label {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -897,21 +897,21 @@ var ds=Object.defineProperty;var ps=(r,t,e)=>t in r?ds(r,t,{enumerable:!0,config
     animation: fadeSlideIn 0.2s ease-out both;
   }
 
-  .tyre-value {
+  .tire-value {
     font-size: 0.95em;
     font-weight: 600;
     color: #ffffff;
   }
 
-  .tyre-unit {
+  .tire-unit {
     font-size: 0.65em;
     color: rgba(255,255,255,0.4);
   }
 
-  .tyre-fl { top: 18%; left: 6%; }
-  .tyre-fr { top: 18%; right: 6%; }
-  .tyre-rl { bottom: 18%; left: 6%; }
-  .tyre-rr { bottom: 18%; right: 6%; }
+  .tire-fl { top: 18%; left: 6%; }
+  .tire-fr { top: 18%; right: 6%; }
+  .tire-rl { bottom: 18%; left: 6%; }
+  .tire-rr { bottom: 18%; right: 6%; }
 
   /* Controls: bottom action bar */
   .ctrl-actions {
@@ -2359,21 +2359,21 @@ var ds=Object.defineProperty;var ps=(r,t,e)=>t in r?ds(r,t,{enumerable:!0,config
 
           ${this._showTyres?o`
             <!-- Tire pressure overlays -->
-            <div class="tyre-label tyre-fl">
-              <span class="tyre-value">${g}</span>
-              <span class="tyre-unit">${m}</span>
+            <div class="tire-label tire-fl">
+              <span class="tire-value">${g}</span>
+              <span class="tire-unit">${m}</span>
             </div>
-            <div class="tyre-label tyre-fr">
-              <span class="tyre-value">${b}</span>
-              <span class="tyre-unit">${m}</span>
+            <div class="tire-label tire-fr">
+              <span class="tire-value">${b}</span>
+              <span class="tire-unit">${m}</span>
             </div>
-            <div class="tyre-label tyre-rl">
-              <span class="tyre-value">${x}</span>
-              <span class="tyre-unit">${m}</span>
+            <div class="tire-label tire-rl">
+              <span class="tire-value">${x}</span>
+              <span class="tire-unit">${m}</span>
             </div>
-            <div class="tyre-label tyre-rr">
-              <span class="tyre-value">${N}</span>
-              <span class="tyre-unit">${m}</span>
+            <div class="tire-label tire-rr">
+              <span class="tire-value">${N}</span>
+              <span class="tire-unit">${m}</span>
             </div>
           `:o`
             <!-- Frunk — text only, top center (open only, must be closed physically) -->
@@ -3078,7 +3078,7 @@ var ds=Object.defineProperty;var ps=(r,t,e)=>t in r?ds(r,t,{enumerable:!0,config
                       alt="" />`:""}
                 `}
                 ${this._hasCustomOverlay?o`
-                  <div class="car-colour-overlay"
+                  <div class="car-color-overlay"
                     style="${this._customOverlayStyleFor(Y)}"></div>`:""}
                 ${bt?o`
                   <div class="driving-lines">

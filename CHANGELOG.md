@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.10] - 2026-09-30
+
+### Changed
+- **CSS class names in US English** — `tyre-label` / `tyre-value` / `tyre-unit` / `tyre-fl|fr|rl|rr` are now `tire-*`, and `car-colour-overlay` is `car-color-overlay`. Only matters if you target these classes with card-mod.
+
 ## [1.0.9] - 2026-09-30
 
 ### Changed (breaking)

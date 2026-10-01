@@ -77,21 +77,21 @@ class TeslaMenuControls extends TeslaBase {
 
           ${this._showTyres ? html`
             <!-- Tire pressure overlays -->
-            <div class="tyre-label tyre-fl">
-              <span class="tyre-value">${tyreFL}</span>
-              <span class="tyre-unit">${dispUnit}</span>
+            <div class="tire-label tire-fl">
+              <span class="tire-value">${tyreFL}</span>
+              <span class="tire-unit">${dispUnit}</span>
             </div>
-            <div class="tyre-label tyre-fr">
-              <span class="tyre-value">${tyreFR}</span>
-              <span class="tyre-unit">${dispUnit}</span>
+            <div class="tire-label tire-fr">
+              <span class="tire-value">${tyreFR}</span>
+              <span class="tire-unit">${dispUnit}</span>
             </div>
-            <div class="tyre-label tyre-rl">
-              <span class="tyre-value">${tyreRL}</span>
-              <span class="tyre-unit">${dispUnit}</span>
+            <div class="tire-label tire-rl">
+              <span class="tire-value">${tyreRL}</span>
+              <span class="tire-unit">${dispUnit}</span>
             </div>
-            <div class="tyre-label tyre-rr">
-              <span class="tyre-value">${tyreRR}</span>
-              <span class="tyre-unit">${dispUnit}</span>
+            <div class="tire-label tire-rr">
+              <span class="tire-value">${tyreRR}</span>
+              <span class="tire-unit">${dispUnit}</span>
             </div>
           ` : html`
             <!-- Frunk — text only, top center (open only, must be closed physically) -->
