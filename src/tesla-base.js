@@ -97,6 +97,12 @@ export class TeslaBase extends LitElement {
     return this._svc(d, 'press', tpl);
   }
 
+  // ── Tap-again confirmation ──────────────────────────────────────────────────
+
+  /** First tap arms `key` (the button shows "Tap again"); a second tap within
+   *  3 s runs `fn`. Arming one button disarms any other. */
+  _confirmTap(key, fn) { return confirmTap(this, key, fn); }
+
   // ── Service call ────────────────────────────────────────────────────────────
 
   async _svc(domain, service, entityTpl, extra = {}) {
@@ -116,4 +122,18 @@ export class TeslaBase extends LitElement {
   _close() {
     this.dispatchEvent(new CustomEvent('close-menu', { bubbles: true, composed: true }));
   }
+}
+
+/** First tap arms `key` on `host` (its button shows "Tap again"); a second tap
+ *  within 3 s runs `fn`. Arming one button disarms any other on the same host. */
+export function confirmTap(host, key, fn) {
+  clearTimeout(host._armTimer);
+  if (host._armed === key) {
+    host._armed = null;
+    host.requestUpdate();
+    return fn();
+  }
+  host._armed = key;
+  host._armTimer = setTimeout(() => { host._armed = null; host.requestUpdate(); }, 3000);
+  host.requestUpdate();
 }

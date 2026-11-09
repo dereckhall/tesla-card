@@ -95,6 +95,9 @@ const FLEET = {
 
   // Time to full charge
   TIME_TO_FULL_CHARGE:  'sensor.{car_name}_time_to_full_charge',
+  CHARGER_POWER:        'sensor.{car_name}_charger_power',
+  CHARGER_CURRENT:      'sensor.{car_name}_charger_current',
+  CHARGER_VOLTAGE:      'sensor.{car_name}_charger_voltage',
 
   // Navigation
   DISTANCE_TO_ARRIVAL:  'sensor.{car_name}_distance_to_arrival',
@@ -197,6 +200,9 @@ const CUSTOM = {
 
   // Time to full charge
   TIME_TO_FULL_CHARGE:  'sensor.{car_name}_time_charge_complete',
+  CHARGER_POWER:        'sensor.{car_name}_charger_power',
+  CHARGER_CURRENT:      null,
+  CHARGER_VOLTAGE:      null,
 
   // Navigation
   DISTANCE_TO_ARRIVAL: 'sensor.{car_name}_distance_to_arrival',
@@ -263,6 +269,9 @@ export const ENTITY_GROUPS = [
     { key: 'CHARGE_LIMIT_NUMBER',  label: 'Charge Limit',    domain: 'number' },
     { key: 'CHARGING_AMPS_NUMBER', label: 'Charging Amps',   domain: 'number' },
     { key: 'CHARGER_DOOR',         label: 'Charge Port Door',domain: 'cover' },
+    { key: 'CHARGER_POWER',        label: 'Charger Power',   domain: 'sensor' },
+    { key: 'CHARGER_CURRENT',      label: 'Charger Current', domain: 'sensor' },
+    { key: 'CHARGER_VOLTAGE',      label: 'Charger Voltage', domain: 'sensor' },
   ]},
   { label: 'Covers & Buttons', keys: [
     { key: 'OPEN_FRUNK',    label: 'Frunk',        domain: 'cover' },

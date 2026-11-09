@@ -34,7 +34,17 @@ class TeslaMenuCharger extends TeslaBase {
 
   _onLimitChange(e) {
     this._pendingLimit = null;
-    this._svc('number', 'set_value', this.E.CHARGE_LIMIT_NUMBER, { value: +e.target.value });
+    // Click-stop at 80 % (the daily-charging limit): within 2 % snaps to it
+    let v = +e.target.value;
+    if (Math.abs(v - 80) <= 2) v = 80;
+    this._svc('number', 'set_value', this.E.CHARGE_LIMIT_NUMBER, { value: v });
+  }
+
+  _num(t) {
+    const v = this._val(t);
+    if (v == null || v === 'unknown' || v === 'unavailable' || v === '') return null;
+    const n = Number(v);
+    return isNaN(n) ? null : n;
   }
 
   _onAmpsInput(e) {
@@ -83,6 +93,27 @@ class TeslaMenuCharger extends TeslaBase {
     const ampsMax   = this._nattr(this.E.CHARGING_AMPS_NUMBER, 'max') ?? 32;
 
     const addedRange = this._attr(this.E.ENERGY_ADDED, 'added_range');
+    const tick80     = limitMin < 80 && limitMax > 80 ? this._pct(80, limitMin, limitMax) : null;
+
+    // Live charging readouts (shown while the cable is in)
+    const pluggedIn  = this._val(this.E.PLUGGED_IN) === 'on';
+    const stateRaw   = this._val(this.E.CHARGING_STATE);
+    const charging   = this._val(this.E.CHARGING) === 'on'
+                    || String(stateRaw ?? '').toLowerCase() === 'charging';
+    const stateText  = stateRaw && !['unknown', 'unavailable'].includes(stateRaw)
+      ? (/^complete$/i.test(stateRaw) ? 'Charging complete'
+        : stateRaw.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase())) : null;
+    const power      = this._num(this.E.CHARGER_POWER) ?? this._num(this.E.CHARGE_RATE);
+    const amps       = this._num(this.E.CHARGER_CURRENT);
+    const volts      = this._num(this.E.CHARGER_VOLTAGE);
+    const kwh        = this._num(this.E.ENERGY_ADDED);
+    const stats = [
+      [power != null ? power.toFixed(1) : '—', 'kW'],
+      [amps  != null ? Math.round(amps)  : '—', 'A'],
+      [volts != null ? Math.round(volts) : '—', 'V'],
+      [kwh   != null ? kwh.toFixed(1)    : '—', 'kWh added'],
+    ];
+    const armed = this._armed === 'charge';
 
     return html`
       <div class="charger-menu${this.layout === 'landscape' ? ' landscape' : ''}">
@@ -98,19 +129,39 @@ class TeslaMenuCharger extends TeslaBase {
           </div>
         </div>
 
+        ${pluggedIn ? html`
+          <!-- Live charging: state, kW / A / V / kWh, start-stop -->
+          <div class="chg-card chg-live">
+            <div class="chg-live-head">
+              <span class="chg-live-state${charging ? ' on' : ''}">${stateText ?? (charging ? 'Charging' : 'Plugged in')}</span>
+            </div>
+            <div class="chg-stats">
+              ${stats.map(([v, u]) => html`
+                <div class="chg-stat"><span class="chg-stat-val">${v}</span><span class="chg-stat-unit">${u}</span></div>`)}
+            </div>
+            <button class="chg-toggle${charging ? ' stop' : ''}${armed ? ' armed' : ''}"
+              @click=${() => this._confirmTap('charge',
+                () => this._svc('switch', charging ? 'turn_off' : 'turn_on', this.E.CHARGER_SWITCH))}>
+              ${armed ? 'Tap again to confirm' : charging ? 'Stop Charging' : 'Start Charging'}
+            </button>
+          </div>` : ''}
+
         <!-- Charge limit card + amps stepper -->
         <div class="chg-card">
           <div class="chg-limit-header">
             <span class="chg-limit-title">Charge limit: ${limitVal}%</span>
             ${addedRange ? html`
-              <p class="chg-limit-sub">${addedRange} km added during last charging session</p>` : ''}
+              <p class="chg-limit-sub">${addedRange} ${rangeUnit} added during last charging session</p>` : ''}
           </div>
 
-          <!-- Green pill slider for charge limit -->
+          <!-- Green pill slider for charge limit (tick + click-stop at 80 %) -->
+          <div class="chg-slider-wrap">
+          ${tick80 != null ? html`<span class="chg-tick" style="left:calc(11px + (100% - 22px) * ${tick80 / 100})"></span>` : ''}
           <input type="range" class="chg-slider" style="--pct:${limitPct}%"
             min=${limitMin} max=${limitMax} step=${limitStep}
             .value=${String(limitVal)}
             @input=${this._onLimitInput} @change=${this._onLimitChange}/>
+          </div>
 
           <!-- Amps stepper row -->
           <div class="chg-amps-row">

@@ -5,6 +5,7 @@ import { getEntities, resolveEntityId } from './entity-config.js';
 import { ICONS } from './icons.js';
 import { FACTORY_COLORS } from './recolor.js';
 import { TESLA_MODELS, getVariantColors } from './models.js';
+import { confirmTap } from './tesla-base.js';
 import './editor.js';
 import './menu-charger.js';
 import './menu-climate.js';
@@ -482,6 +483,53 @@ class TeslaCard extends LitElement {
     if (e.target === e.currentTarget) this._closeSettings();
   }
 
+  // ─── Home action row (Flash · Horn · Port · Start · Vent · Sentry) ────────
+  // Every button needs a second tap within 3 s (label turns "Tap again").
+
+  _renderHomeActions(chargerDoorOpen) {
+    const E = this.E;
+    const windowsOpen = this._val(E.WINDOWS_COVER) === 'open';
+    const sentryState = this._val(E.SENTRY_MODE);
+    const sentryOn    = sentryState === 'on';
+    const sentryOff   = sentryState === 'off';
+    const btn = (key, icon, label, run, { active = false, disabled = false } = {}) => {
+      const armed = this._armed === key;
+      return html`
+        <button class="home-act${armed ? ' armed' : ''}${active ? ' active' : ''}"
+          ?disabled=${disabled}
+          @click=${() => confirmTap(this, key, run)}>
+          <span class="icon">${unsafeHTML(icon)}</span>
+          <span class="home-act-label">${armed ? 'Tap again' : label}</span>
+        </button>`;
+    };
+    return html`
+      <div class="home-actions">
+        ${btn('flash', ICONS['flash-lights'], 'Flash',
+          () => this._svc('button', 'press', E.FLASH_LIGHTS))}
+        ${btn('horn', ICONS.horn, 'Horn',
+          () => this._svc('button', 'press', E.HORN))}
+        ${btn('port', ICONS['charging-port'], chargerDoorOpen ? 'Close Port' : 'Port',
+          () => this._openClose(E.CHARGE_PORT_OPEN, E.CHARGE_PORT_CLOSE, chargerDoorOpen),
+          { active: chargerDoorOpen })}
+        ${btn('start', ICONS['remote-start'], 'Start',
+          () => this._svc('button', 'press', E.REMOTE_START))}
+        ${btn('vent', windowsOpen ? ICONS['vent-close'] : ICONS['vent-open'], windowsOpen ? 'Close' : 'Vent',
+          () => this._svc('cover', windowsOpen ? 'close_cover' : 'open_cover', E.WINDOWS_COVER),
+          { active: windowsOpen })}
+        ${btn('sentry', ICONS.sentry, 'Sentry',
+          () => this._svc('switch', sentryOn ? 'turn_off' : 'turn_on', E.SENTRY_MODE_SWITCH),
+          { active: sentryOn, disabled: !sentryOn && !sentryOff })}
+      </div>`;
+  }
+
+  /** Open/close — cover entities or separate open/close buttons */
+  _openClose(openTpl, closeTpl, isOpen) {
+    const tpl = isOpen ? closeTpl : openTpl;
+    const d = tpl ? tpl.split('.')[0] : null;
+    if (d === 'cover') return this._svc('cover', isOpen ? 'close_cover' : 'open_cover', tpl);
+    return this._svc(d, 'press', tpl);
+  }
+
   // ─── Render ────────────────────────────────────────────────────────────────
 
   render() {
@@ -793,6 +841,7 @@ class TeslaCard extends LitElement {
                   <span class="icon">${unsafeHTML(ICONS['climate-fan'])}</span>
                 </button>
               </div>
+              ${this.config.show_home_actions !== false ? this._renderHomeActions(chargerDoorOpen) : ''}
             </div>
             <div class="nav-rows">
               <button class="nav-row"
