@@ -98,6 +98,7 @@ car_name: my_tesla
 | `image_path` | No | `/hacsfiles/tesla-card` | Base path where car images are stored |
 | `name` | No | _(car_name)_ | Display name shown at the top of the card |
 | `show_speed` | No | `true` | Show the Parked / speed status column |
+| `show_home_actions` | No | `true` | Show the Flash · Horn · Port · Start · Vent · Sentry row on the main screen (each needs a second tap within 3 s) |
 | `interior` | No | `black` | `white` uses the white-interior climate image where the color has one (Model Y 2025+ Quicksilver) |
 
 ### Full example

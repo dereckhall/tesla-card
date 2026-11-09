@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.0] - 2026-11-09
+
+### Added
+- **Home action row** — Flash, Horn, Port, Start, Vent and Sentry under the quick icons on the main screen. Each button needs a second tap within 3 seconds (it reads "Tap again"); Sentry, an open charge port and open windows show white. Turn it off with `show_home_actions: false`.
+- **Live charging readouts** — while plugged in, the charging screen shows the charge state, kW, A, V and kWh added, and a Start/Stop Charging button (second tap to confirm).
+- **80 % mark on the charge-limit slider** — a tick at 80 %, and releasing within 2 % of it snaps to 80.
+- Entity keys `CHARGER_POWER`, `CHARGER_CURRENT`, `CHARGER_VOLTAGE` (Fleet: `sensor.<car>_charger_power/_current/_voltage`), overridable like the others.
+
+### Fixed
+- "Added during last charging session" used a hard-coded "km"; it now uses the range sensor's unit.
+
 ## [1.3.4] - 2026-09-30
 
 ### Fixed
