@@ -187,6 +187,68 @@ export const chargerStyles = css`
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
   }
 
+  /* Live charging card: state line, four readouts, start/stop */
+  .chg-live { padding-bottom: 16px; }
+
+  .chg-live-head { margin-bottom: 12px; }
+
+  .chg-live-state {
+    font-size: 0.9em;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  .chg-live-state.on { color: #19d462; }
+
+  .chg-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .chg-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 4px;
+    border-radius: 10px;
+    background: #1e1e20;
+  }
+
+  .chg-stat-val  { font-size: 1.05em; font-weight: 600; color: #ffffff; }
+  .chg-stat-unit { font-size: 0.68em; color: rgba(255,255,255,0.45); white-space: nowrap; }
+
+  .chg-toggle {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.88em;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .chg-toggle.armed { background: #ffffff; color: #0b0b0c; }
+
+  /* 80 % tick under the limit slider */
+  .chg-slider-wrap { position: relative; }
+  .chg-tick {
+    position: absolute;
+    top: -5px;
+    width: 2px;
+    height: 16px;
+    margin-left: -1px;
+    border-radius: 1px;
+    background: rgba(255,255,255,0.35);
+    pointer-events: none;
+  }
+
   /* Amps stepper row — darker band at bottom of card */
   .chg-amps-row {
     display: flex;
@@ -1287,6 +1349,11 @@ export const cardStyles = css`
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
 
+  .quick-actions:has(+ .home-actions) {
+    border-bottom: none;
+    padding-bottom: 6px;
+  }
+
   .quick-btn {
     display: flex;
     align-items: center;
@@ -1314,6 +1381,51 @@ export const cardStyles = css`
   .quick-btn .icon {
     width: 26px;
     height: 26px;
+  }
+
+  /* ── Home action row: Flash · Horn · Port · Start · Vent · Sentry ──
+     Same look as the Controls screen's action bar. Each button needs a
+     second tap within 3 s; the armed one turns white and says "Tap again". */
+  .home-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 4px 8px 12px;
+    background: #161719;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .home-act {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 0;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: rgba(255,255,255,0.45);
+    font-family: inherit;
+    font-size: 0.7em;
+    cursor: pointer;
+    padding: 8px 2px;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .home-act:hover   { color: rgba(255,255,255,0.8); }
+  .home-act.active  { color: #ffffff; }
+  .home-act.armed   { color: #ffffff; background: rgba(255,255,255,0.08); }
+  .home-act:disabled { opacity: 0.25; pointer-events: none; }
+
+  .home-act .icon { width: 24px; height: 24px; }
+
+  .home-act-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   /* Official Tesla SVG button images in quick actions */
